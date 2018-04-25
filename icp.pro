@@ -26,13 +26,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    Block/block.cpp
+    Block/block1.cpp \
+    Block/block2.cpp
 
 HEADERS += \
         mainwindow.h \
-    Block/block.h
+    Block/block1.h \
+    Block/block2.h
 
 FORMS += \
         mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=gnu++14
 
 DISTFILES +=
