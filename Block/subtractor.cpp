@@ -6,6 +6,9 @@ subtractor::subtractor(qreal x, qreal y) {
     startY = y;
 
     setFlag(ItemIsMovable);
+    this->setAcceptHoverEvents(true);
+
+    constructBlock();
 }
 
 int subtractor::getBlockWidth() const { return BLOCK_WIDTH; }

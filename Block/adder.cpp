@@ -6,6 +6,8 @@ adder::adder(qreal x, qreal y) {
     startY = y;
 
     setFlag(ItemIsMovable);
+
+    constructBlock();
 }
 
 int adder::getBlockWidth() const { return BLOCK_WIDTH; }

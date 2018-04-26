@@ -19,6 +19,7 @@ MainWindow::~MainWindow() {
 // kliknuti na tool1 prida adder doprostred canvasu
 void MainWindow::on_actionadder_triggered() {
     scene->addItem(new adder(this->width() / 2, this->height() / 2));
+    qDebug("na scene je %d itemu", scene->items().length());
 }
 
 // kliknuti na tool2 prida subtractor doprostred canvasu
@@ -31,6 +32,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
     switch (lastTool) {
     case(1):
         scene->addItem(new adder(event->localPos().x() - 2 * toolBarWidth, event->localPos().y() - menuHeight));
+        qDebug("na scene je %d itemu", scene->children().length());
         break;
     case(2):
         scene->addItem(new subtractor(event->localPos().x() - 2 * toolBarWidth, event->localPos().y() - menuHeight));

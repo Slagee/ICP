@@ -1,6 +1,6 @@
 #include "port.h"
 
-port::port(qreal x, qreal y) {
+port::port(qreal x, qreal y){
     pressed = false;
     onMouse = false;
     startX = x;

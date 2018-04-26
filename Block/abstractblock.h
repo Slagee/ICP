@@ -2,20 +2,22 @@
 #define ABSTRACTBLOCK_H
 
 #include <QPainter>
-#include <QGraphicsItem>
+#include <QGraphicsItemGroup>
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QString>
 
 #include "../Port/port.h"
 
-class abstractblock : public QGraphicsItem {
+class abstractblock : public QGraphicsItemGroup {
 public:
     const int PORT_RADIUS = 7;
 
     bool pressed;
     qreal startX;
     qreal startY;
+
+    void constructBlock();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget);
     QRectF boundingRect() const;
