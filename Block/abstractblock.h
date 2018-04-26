@@ -1,26 +1,23 @@
-#ifndef BLOCK2_H
-#define BLOCK2_H
+#ifndef ABSTRACTBLOCK_H
+#define ABSTRACTBLOCK_H
+
 #include <QPainter>
 #include <QGraphicsItem>
-#include <QMouseEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QString>
 
-class Block2 : public QGraphicsItem
-{
+class abstractblock : public QGraphicsItem {
 public:
-    Block2(qreal x, qreal y);
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget);
     bool Pressed;
     qreal posX;
     qreal posY;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) = 0;
+    QRectF boundingRect() const = 0;
 
-    // QGraphicsItem interface
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 };
 
-#endif // BLOCK2_H
+#endif // ABSTRACTBLOCK_H

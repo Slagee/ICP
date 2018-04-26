@@ -26,13 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    Block/block1.cpp \
-    Block/block2.cpp
+    Block/abstractblock.cpp \
+    Block/adder.cpp \
+    Block/subtractor.cpp
 
 HEADERS += \
         mainwindow.h \
-    Block/block1.h \
-    Block/block2.h
+    Block/abstractblock.h \
+    Block/adder.h \
+    Block/subtractor.h
 
 FORMS += \
         mainwindow.ui

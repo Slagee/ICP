@@ -20,11 +20,23 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>-80</x>
+      <x>-1</x>
       <y>0</y>
-      <width>911</width>
-      <height>591</height>
+      <width>801</width>
+      <height>531</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>531</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>801</width>
+      <height>531</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -69,8 +81,8 @@
    <attribute name="toolBarBreak">
     <bool>true</bool>
    </attribute>
-   <addaction name="actionblock1"/>
-   <addaction name="actionblock2"/>
+   <addaction name="actionadder"/>
+   <addaction name="actionsubtractor"/>
   </widget>
   <action name="action_Open">
    <property name="text">
@@ -82,14 +94,14 @@
     <string>&amp;Save</string>
    </property>
   </action>
-  <action name="actionblock1">
+  <action name="actionadder">
    <property name="text">
-    <string>block1</string>
+    <string>adder</string>
    </property>
   </action>
-  <action name="actionblock2">
+  <action name="actionsubtractor">
    <property name="text">
-    <string>block2</string>
+    <string>subtractor</string>
    </property>
   </action>
  </widget>

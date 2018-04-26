@@ -1,20 +1,22 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "ui_mainwindow.h"
+#include <QMessageBox>
+#include <QDebug>
+#include <QCursor>
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QDialog>
 #include <QtGui>
 #include <QGraphicsSceneMouseEvent>
-#include "Block/block1.h"
-#include "Block/block2.h"
+#include "Block/abstractblock.h"
+#include "Block/adder.h"
+#include "Block/subtractor.h"
 
-namespace Ui {
-class MainWindow;
-}
+namespace Ui { class MainWindow; }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -22,22 +24,20 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionblock1_triggered();
-    void on_actionblock2_triggered();
-
-    void on_actionblock2_hovered();
-
-    void on_actionblock1_hovered();
+    void on_actionadder_triggered();
+    void on_actionadder_hovered();
+    void on_actionsubtractor_hovered();
+    void on_actionsubtractor_triggered();
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    Block1 *block1;
-    Block2 *block2;
+    abstractblock *block;
     QRectF *middle;
     int lastTool;
+    qreal toolBarWidth;
+    qreal menuHeight;
 
-    // QWidget interface
 protected:
     void mouseReleaseEvent(QMouseEvent *event);
 };

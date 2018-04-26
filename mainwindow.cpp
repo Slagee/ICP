@@ -1,53 +1,42 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <QMessageBox>
-#include <QDebug>
-#include <QCursor>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
-    scene->setSceneRect(0, 0, this->width() - 62, this->height() - 55);
+    toolBarWidth = 93;
+    menuHeight = 55;
+    scene->setSceneRect(0, 0, this->width() - toolBarWidth, this->height() - menuHeight);
     ui->graphicsView->setScene(scene);
-    block2 = new Block2((qreal) 400,(qreal) 200);
-    scene->addItem(block2);
     setCentralWidget( ui->graphicsView );   
     lastTool = 0;
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_actionblock1_triggered()
-{
-    block1 = new Block1();
-    scene->addItem(block1);
+// kliknuti na tool1 prida adder doprostred canvasu
+void MainWindow::on_actionadder_triggered() {
+    scene->addItem(new adder(this->width() / 2, this->height() / 2));
 }
 
-void MainWindow::on_actionblock2_triggered()
-{
-    qDebug("There are %d blocks", scene->items().length());
-    qDebug("scena ma %f x %f", scene->width(), scene->height());
-    qDebug("Prvni blok je na pozici %f x %f", scene->items().last()->scenePos().x(), scene->items().last()->scenePos().y());
-    qDebug("velikost okna je %d x %d", this->size().width(), this->height());
-    block2 = new Block2((qreal) 10,(qreal) 10);
-    scene->addItem(block2);
+// kliknuti na tool2 prida subtractor doprostred canvasu
+void MainWindow::on_actionsubtractor_triggered() {
+    scene->addItem(new subtractor(this->width() / 2, this->height() / 2));
 }
 
-
-void MainWindow::mouseReleaseEvent(QMouseEvent *event)
-{
-    qDebug("mys je na je na %f x %f", event->localPos().x(), event->localPos().y());
-    qDebug("scena je na %f x %f", scene->sceneRect().x(), scene->sceneRect().y());
-    block2 = new Block2(event->localPos().x() - 112, event->localPos().y() - 55);
-    scene->addItem(block2);
+// po realesu mysi prida blok...
+void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
+    switch (lastTool) {
+    case(1):
+        scene->addItem(new adder(event->localPos().x() - 2 * toolBarWidth, event->localPos().y() - menuHeight));
+        break;
+    case(2):
+        scene->addItem(new subtractor(event->localPos().x() - 2 * toolBarWidth, event->localPos().y() - menuHeight));
+        break;
+    }
 }
 
-void MainWindow::on_actionblock1_hovered() { lastTool = 1; }
-
-void MainWindow::on_actionblock2_hovered() { lastTool = 2; }
+// trosku hack - nastavi block, ktery se na pridat po drag and dropu...
+void MainWindow::on_actionadder_hovered() { lastTool = 1; }
+void MainWindow::on_actionsubtractor_hovered() { lastTool = 2; }
