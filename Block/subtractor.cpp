@@ -6,7 +6,6 @@ subtractor::subtractor(qreal x, qreal y) {
     startY = y;
 
     setFlag(ItemIsMovable);
-    this->setAcceptHoverEvents(true);
 
     constructBlock();
 }
@@ -18,3 +17,5 @@ int subtractor::getBlockHeight() const { return BLOCK_HEIGHT; }
 int subtractor::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int subtractor::getOutPortsCount() const { return OUT_PORTS_COUNT; }
+
+QString subtractor::getBlockName() const { return BLOCK_NAME; }

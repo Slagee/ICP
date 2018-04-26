@@ -17,6 +17,7 @@ public:
     int getBlockHeight() const;
     int getInPortsCount() const;
     int getOutPortsCount() const;
+    QString getBlockName() const;
 };
 
 #endif // SUBTRACTOR_H

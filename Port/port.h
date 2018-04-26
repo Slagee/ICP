@@ -9,17 +9,16 @@
 class port : public QGraphicsItem {
 private:
     const int PORT_RADIUS = 7;
-
     bool onMouse;
     bool pressed;
-    qreal startX;
-    qreal startY;
 
 public:
-    port(qreal x, qreal y);
+    port();
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    double getPortRadius();
 
 protected:
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);

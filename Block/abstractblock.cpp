@@ -3,31 +3,31 @@
 QRectF abstractblock::boundingRect() const { return QRectF(startX, startY, getBlockWidth(), getBlockHeight()); }
 
 void abstractblock::constructBlock() {
-    port *newport = new port(startX - 2 * PORT_RADIUS, startY);
-    this->addToGroup(newport);
+    port *newPort;
+    int portsDistance = (getBlockHeight() - 2 * TOP_BOTTOM_SPACING) / (getInPortsCount() + 1);
+    for (int i = 1; i <= getInPortsCount(); i++) {
+        newPort = new port();
+        newPort->setX(startX - 2 * newPort->getPortRadius());
+        newPort->setY(startY + i * portsDistance + TOP_BOTTOM_SPACING - newPort->getPortRadius());
+        this->addToGroup(newPort);
+    }
+    portsDistance = (getBlockHeight() - 2 * TOP_BOTTOM_SPACING) / (getOutPortsCount() + 1);
+    for (int i = 1; i <= getOutPortsCount(); i++) {
+        newPort = new port();
+        newPort->setX(startX + getBlockWidth());
+        newPort->setY(startY + i * portsDistance + TOP_BOTTOM_SPACING - newPort->getPortRadius());
+        this->addToGroup(newPort);
+    }
 }
 
 void abstractblock::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
     QRectF blockBox = boundingRect();
     QBrush brush(Qt::green);
-
+    QTextOption blockNameOptions(Qt::AlignCenter);
 
     if (pressed) { brush.setColor(Qt::red); }
 
-    for (int i = 0; i < getInPortsCount(); i++) {
-
-    }
-
-    for (int i = 0; i < getOutPortsCount(); i++) {
-
-    }
-
-    //painter->drawEllipse((QGraphicsItem) this->childItems().last()->);
-    //painter->drawEllipse(startX, startY, PORT_RADIUS * 2, PORT_RADIUS * 2);
-    //painter->drawEllipse(startX + getBlockWidth() - PORT_RADIUS * 2, startY, PORT_RADIUS * 2, PORT_RADIUS * 2);
-    //painter->drawEllipse(startX + getBlockWidth() - PORT_RADIUS * 2, startY + getBlockHeight() - PORT_RADIUS * 2, PORT_RADIUS * 2, PORT_RADIUS * 2);
-    //painter->drawEllipse(startX, startY + getBlockHeight() - PORT_RADIUS * 2, PORT_RADIUS * 2, PORT_RADIUS * 2);
-    //painter->fillRect(startX + PORT_RADIUS * 2 + 1, startY + 1, getBlockWidth() - 4 * PORT_RADIUS - 1, getBlockHeight() - 1, brush);
+    painter->drawText(blockBox, getBlockName(), blockNameOptions);
     painter->drawRect(startX, startY, getBlockWidth(), getBlockHeight());
 }
 

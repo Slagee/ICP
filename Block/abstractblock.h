@@ -6,12 +6,14 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QString>
+#include <QFontMetrics>
+#include <QTextOption>
 
 #include "../Port/port.h"
 
 class abstractblock : public QGraphicsItemGroup {
 public:
-    const int PORT_RADIUS = 7;
+    const int TOP_BOTTOM_SPACING = -5;
 
     bool pressed;
     qreal startX;
@@ -26,6 +28,7 @@ public:
     virtual int getBlockHeight() const = 0;
     virtual int getInPortsCount() const = 0;
     virtual int getOutPortsCount() const = 0;
+    virtual QString getBlockName() const = 0;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

@@ -17,3 +17,5 @@ int adder::getBlockHeight() const { return BLOCK_HEIGHT; }
 int adder::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int adder::getOutPortsCount() const { return OUT_PORTS_COUNT; }
+
+QString adder::getBlockName() const { return BLOCK_NAME; }
