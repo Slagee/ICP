@@ -2,21 +2,16 @@
 
 adder::adder(qreal x, qreal y) {
     Pressed = false;
+    startX = x;
+    startY = y;
+
     setFlag(ItemIsMovable);
-    posX = x;
-    posY = y;
 }
 
-void adder::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
-    QRectF rec = boundingRect();
-    QBrush brush(Qt::green);
+int adder::getBlockWidth() const { return BLOCK_WIDTH; }
 
-    if (Pressed) {
-        brush.setColor(Qt::red);
-    }
+int adder::getBlockHeight() const { return BLOCK_HEIGHT; }
 
-    painter->fillRect(rec, brush);
-    painter->drawRect(rec);
-}
+int adder::getInPortsCount() const { return IN_PORTS_COUNT; }
 
-QRectF adder::boundingRect() const { return QRectF(posX, posY, BLOCK_WIDTH, BLOCK_HEIGHT); }
+int adder::getOutPortsCount() const { return OUT_PORTS_COUNT; }

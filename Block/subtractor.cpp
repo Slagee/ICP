@@ -2,23 +2,16 @@
 
 subtractor::subtractor(qreal x, qreal y) {
     Pressed = false;
+    startX = x;
+    startY = y;
+
     setFlag(ItemIsMovable);
-    posX = x;
-    posY = y;
 }
 
-QRectF subtractor::boundingRect() const {
-    return QRectF(posX, posY, BLOCK_WIDTH, BLOCK_HEIGHT);
-}
+int subtractor::getBlockWidth() const { return BLOCK_WIDTH; }
 
-void subtractor::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
-    QRectF rec = boundingRect();
-    QBrush brush(Qt::blue);
+int subtractor::getBlockHeight() const { return BLOCK_HEIGHT; }
 
-    if (Pressed) {
-        brush.setColor(Qt::red);
-    }
+int subtractor::getInPortsCount() const { return IN_PORTS_COUNT; }
 
-    painter->fillRect(rec, brush);
-    painter->drawRect(rec);
-}
+int subtractor::getOutPortsCount() const { return OUT_PORTS_COUNT; }

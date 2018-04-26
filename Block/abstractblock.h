@@ -9,11 +9,19 @@
 
 class abstractblock : public QGraphicsItem {
 public:
+    const int PORT_RADIUS = 7;
+
     bool Pressed;
-    qreal posX;
-    qreal posY;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) = 0;
-    QRectF boundingRect() const = 0;
+    qreal startX;
+    qreal startY;
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget);
+    QRectF boundingRect() const;
+
+    virtual int getBlockWidth() const = 0;
+    virtual int getBlockHeight() const = 0;
+    virtual int getInPortsCount() const = 0;
+    virtual int getOutPortsCount() const = 0;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

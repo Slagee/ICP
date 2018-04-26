@@ -7,12 +7,16 @@ class adder : public abstractblock {
 private:
     const int BLOCK_WIDTH = 100;
     const int BLOCK_HEIGHT = 40;
+    const int IN_PORTS_COUNT = 3;
+    const int OUT_PORTS_COUNT = 1;
     const QString BLOCK_NAME = "ADDER";
 
 public:
     adder(qreal x, qreal y);
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget);
+    int getBlockWidth() const;
+    int getBlockHeight() const;
+    int getInPortsCount() const;
+    int getOutPortsCount() const;
 };
 
 #endif // ADDER_H
