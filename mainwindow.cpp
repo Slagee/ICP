@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     toolBarWidth = 93;
     menuHeight = 55;
     scene->setSceneRect(0, 0, this->width() - toolBarWidth, this->height() - menuHeight);
+    scene->addItem(new port(100, 100));
     ui->graphicsView->setScene(scene);
     setCentralWidget( ui->graphicsView );   
     lastTool = 0;

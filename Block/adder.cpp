@@ -1,7 +1,7 @@
 #include "adder.h"
 
 adder::adder(qreal x, qreal y) {
-    Pressed = false;
+    pressed = false;
     startX = x;
     startY = y;
 

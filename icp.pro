@@ -28,13 +28,15 @@ SOURCES += \
         mainwindow.cpp \
     Block/abstractblock.cpp \
     Block/adder.cpp \
-    Block/subtractor.cpp
+    Block/subtractor.cpp \
+    Port/port.cpp
 
 HEADERS += \
         mainwindow.h \
     Block/abstractblock.h \
     Block/adder.h \
-    Block/subtractor.h
+    Block/subtractor.h \
+    Port/port.h
 
 FORMS += \
         mainwindow.ui

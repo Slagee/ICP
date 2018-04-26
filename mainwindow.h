@@ -13,6 +13,7 @@
 #include "Block/abstractblock.h"
 #include "Block/adder.h"
 #include "Block/subtractor.h"
+#include "Port/port.h"
 
 namespace Ui { class MainWindow; }
 

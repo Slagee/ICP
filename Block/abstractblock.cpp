@@ -3,11 +3,11 @@
 QRectF abstractblock::boundingRect() const { return QRectF(startX, startY, getBlockWidth(), getBlockHeight()); }
 
 void abstractblock::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
-    QRectF rec = boundingRect();
+    QRectF blockBox = boundingRect();
     QBrush brush(Qt::green);
 
 
-    if (Pressed) { brush.setColor(Qt::red); }
+    if (pressed) { brush.setColor(Qt::red); }
 
     for (int i = 0; i < getInPortsCount(); i++) {
 
@@ -17,6 +17,9 @@ void abstractblock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     }
 
+    //this->childItems().append(new port(startX + getBlockWidth() / 2 , startY + getBlockHeight() / 2));
+
+    //painter->drawEllipse((QGraphicsItem) this->childItems().last()->);
     painter->drawEllipse(startX, startY, PORT_RADIUS * 2, PORT_RADIUS * 2);
     painter->drawEllipse(startX + getBlockWidth() - PORT_RADIUS * 2, startY, PORT_RADIUS * 2, PORT_RADIUS * 2);
     painter->drawEllipse(startX + getBlockWidth() - PORT_RADIUS * 2, startY + getBlockHeight() - PORT_RADIUS * 2, PORT_RADIUS * 2, PORT_RADIUS * 2);
@@ -26,13 +29,13 @@ void abstractblock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 }
 
 void abstractblock::mousePressEvent(QGraphicsSceneMouseEvent *event) {
-    Pressed = true;
+    pressed = true;
     this->update();
     QGraphicsItem::mousePressEvent(event);
 }
 
 void abstractblock::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
-    Pressed = false;
+    pressed = false;
     this->update();
     QGraphicsItem::mouseReleaseEvent(event);
 }

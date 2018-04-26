@@ -1,7 +1,7 @@
 #include "subtractor.h"
 
 subtractor::subtractor(qreal x, qreal y) {
-    Pressed = false;
+    pressed = false;
     startX = x;
     startY = y;
 

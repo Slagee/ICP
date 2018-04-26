@@ -7,11 +7,13 @@
 #include <QDebug>
 #include <QString>
 
+#include "../Port/port.h"
+
 class abstractblock : public QGraphicsItem {
 public:
     const int PORT_RADIUS = 7;
 
-    bool Pressed;
+    bool pressed;
     qreal startX;
     qreal startY;
 
