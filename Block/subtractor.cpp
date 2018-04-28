@@ -1,12 +1,13 @@
 #include "subtractor.h"
 
-subtractor::subtractor(qreal x, qreal y) {
+subtractor::subtractor(int x, int y, QGraphicsScene *parent) {
     pressed = false;
-    startX = x;
-    startY = y;
+    startX = x - BLOCK_WIDTH / 2;
+    startY = y - BLOCK_HEIGHT / 2;
+    myParent = parent;
 
     setFlag(ItemIsMovable);
-
+    this->setHandlesChildEvents(false);
     constructBlock();
 }
 

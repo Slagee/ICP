@@ -9,11 +9,14 @@
 #include <QGraphicsScene>
 #include <QDialog>
 #include <QtGui>
+#include <QLine>
 #include <QGraphicsSceneMouseEvent>
-#include "Block/abstractblock.h"
+#include "Block/abstractBlock.h"
 #include "Block/adder.h"
 #include "Block/subtractor.h"
 #include "Port/port.h"
+#include "Wire/wire.h"
+#include "Scene/scene.h"
 
 namespace Ui { class MainWindow; }
 
@@ -23,6 +26,8 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    qreal toolBarWidth;
+    qreal menuHeight;
 
 private slots:
     void on_actionadder_triggered();
@@ -33,11 +38,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    abstractblock *block;
+    abstractBlock *block;
     QRectF *middle;
     int lastTool;
-    qreal toolBarWidth;
-    qreal menuHeight;
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event);

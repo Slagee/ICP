@@ -1,9 +1,9 @@
 #ifndef SUBTRACTOR_H
 #define SUBTRACTOR_H
 
-#include "abstractblock.h"
+#include "abstractBlock.h"
 
-class subtractor : public abstractblock {
+class subtractor : public abstractBlock {
 private:
     const int BLOCK_WIDTH = 120;
     const int BLOCK_HEIGHT = 50;
@@ -12,7 +12,7 @@ private:
     const QString BLOCK_NAME = "SUBTRACTOR";
 
 public:
-    subtractor(qreal x, qreal y);
+    subtractor(int x, int y, QGraphicsScene *parent = 0);
     int getBlockWidth() const;
     int getBlockHeight() const;
     int getInPortsCount() const;

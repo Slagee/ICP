@@ -6,18 +6,21 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QString>
-#include <QFontMetrics>
 #include <QTextOption>
 
 #include "../Port/port.h"
 
-class abstractblock : public QGraphicsItemGroup {
+class adder;
+class substractor;
+
+class abstractBlock : public QGraphicsItemGroup {
 public:
     const int TOP_BOTTOM_SPACING = -5;
 
     bool pressed;
-    qreal startX;
-    qreal startY;
+    int startX;
+    int startY;
+    QGraphicsScene *myParent;
 
     void constructBlock();
 
@@ -33,6 +36,13 @@ public:
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+    // QGraphicsItem interface
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
 };
 
 #endif // ABSTRACTBLOCK_H
