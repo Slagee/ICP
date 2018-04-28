@@ -25,10 +25,7 @@ void abstractBlock::constructBlock() {
 
 void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
     QRectF blockBox = boundingRect();
-    QBrush brush(Qt::green);
     QTextOption blockNameOptions(Qt::AlignCenter);
-
-    if (pressed) { brush.setColor(Qt::red); }
 
     for (int i = 0; i < this->childItems().length(); i++) {
         port *blockPort = qgraphicsitem_cast<port *>(this->childItems()[i]);
@@ -47,33 +44,4 @@ void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
     painter->drawText(blockBox, getBlockName(), blockNameOptions);
     painter->drawRect(startX, startY, getBlockWidth(), getBlockHeight());
-}
-
-void abstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event) {
-    pressed = true;
-    this->update();
-    QGraphicsItem::mousePressEvent(event);
-}
-
-void abstractBlock::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
-    pressed = false;
-    this->update();
-    QGraphicsItem::mouseReleaseEvent(event);
-    qDebug("abstractBlockmouseReleaseEvent");
-}
-
-void abstractBlock::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
-{    qDebug("abstractBlockdragEnterEvent");
-}
-
-void abstractBlock::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
-{    qDebug("abstractBlockdragLeaveEvent");
-}
-
-void abstractBlock::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
-{    qDebug("abstractBlockdragMoveEvent");
-}
-
-void abstractBlock::dropEvent(QGraphicsSceneDragDropEvent *event)
-{    qDebug("abstractBlockzddropEventar");
 }

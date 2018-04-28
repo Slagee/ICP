@@ -1,7 +1,6 @@
 #include "adder.h"
 
 adder::adder(int x, int y, QGraphicsScene *parent) {
-    pressed = false;
     startX = x - BLOCK_WIDTH / 2;
     startY = y - BLOCK_HEIGHT / 2;
     myParent = parent;

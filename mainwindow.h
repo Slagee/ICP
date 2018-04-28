@@ -16,7 +16,6 @@
 #include "Block/subtractor.h"
 #include "Port/port.h"
 #include "Wire/wire.h"
-#include "Scene/scene.h"
 
 namespace Ui { class MainWindow; }
 
@@ -28,6 +27,8 @@ public:
     ~MainWindow();
     qreal toolBarWidth;
     qreal menuHeight;
+    int magicConstant1;
+    int magicConstant2;
 
 private slots:
     void on_actionadder_triggered();

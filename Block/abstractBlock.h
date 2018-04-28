@@ -14,10 +14,10 @@ class adder;
 class substractor;
 
 class abstractBlock : public QGraphicsItemGroup {
-public:
+private:
     const int TOP_BOTTOM_SPACING = -5;
 
-    bool pressed;
+public:
     int startX;
     int startY;
     QGraphicsScene *myParent;
@@ -32,17 +32,6 @@ public:
     virtual int getInPortsCount() const = 0;
     virtual int getOutPortsCount() const = 0;
     virtual QString getBlockName() const = 0;
-
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-
-    // QGraphicsItem interface
-protected:
-    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
-    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-    void dropEvent(QGraphicsSceneDragDropEvent *event);
 };
 
 #endif // ABSTRACTBLOCK_H

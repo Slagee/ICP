@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     toolBarWidth = 93;
     menuHeight = 25;
-    scene->setSceneRect(0, 0, this->width() - toolBarWidth - 11, this->height() - menuHeight - 29);
+    magicConstant1 = 11;
+    magicConstant2 = 29;
+    scene->setSceneRect(0, 0, this->width() - toolBarWidth - magicConstant1, this->height() - menuHeight - magicConstant2);
 
     ui->graphicsView->setScene(scene);
     setCentralWidget( ui->graphicsView );

@@ -1,6 +1,5 @@
 #include "abstractType.h"
 
-abstractType::abstractType()
-{
+bool abstractType::getValuesSet() { return this->valuesSet; }
 
-}
+void abstractType::setValuesSet(bool value) { this->valuesSet = value; }

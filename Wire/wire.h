@@ -21,10 +21,9 @@ public:
     int shiftEndX;
     int shiftEndY;
     bool dragFinished;
-
     QGraphicsScene *myParent;
-    wire(int x1, int y1, int x2, int y2, QGraphicsScene *parent = 0);
 
+    wire(int x1, int y1, int x2, int y2, QGraphicsScene *parent = 0);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
@@ -32,6 +31,5 @@ public:
     void setEndPort(port *port);
     port *getStartPort();
     port *getEndPort();
-
 };
 #endif // WIRE_H

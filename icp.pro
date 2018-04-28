@@ -31,7 +31,10 @@ SOURCES += \
     Port/port.cpp \
     Wire/wire.cpp \
     Block/abstractBlock.cpp \
-    Type/abstractType.cpp
+    Type/abstractType.cpp \
+    Type/onedecimalnumber.cpp \
+    Type/twodecimalnumbers.cpp \
+    Type/threedecimalnumbers.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +43,10 @@ HEADERS += \
     Port/port.h \
     Wire/wire.h \
     Block/abstractBlock.h \
-    Type/abstractType.h
+    Type/abstractType.h \
+    Type/onedecimalnumber.h \
+    Type/twodecimalnumbers.h \
+    Type/threedecimalnumbers.h
 
 FORMS += \
         mainwindow.ui
