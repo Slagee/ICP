@@ -10,9 +10,10 @@ private:
     const QString VALUES_NAMES[NUMBER_OF_VALUES] = {"Decimal number", "Decimal number"};
 
     double values[NUMBER_OF_VALUES] = {0, 0};
-    QGraphicsItem *myParent;
 
 public:
+    QGraphicsItem *myParent = nullptr;
+
     twoDecimalNumbers(QGraphicsItem *parent);
 
     double getValue(int index);

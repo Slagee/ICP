@@ -1,13 +1,13 @@
 #include "adder.h"
 
 adder::adder(int x, int y, QGraphicsScene *parent) {
-    startX = x - BLOCK_WIDTH / 2;
-    startY = y - BLOCK_HEIGHT / 2;
-    myParent = parent;
+    this->startX = x - this->BLOCK_WIDTH / 2;
+    this->startY = y - this->BLOCK_HEIGHT / 2;
+    this->myParent = parent;
 
-    setFlag(ItemIsMovable);
+    this->setFlag(ItemIsMovable);
     this->setHandlesChildEvents(false);
-    constructBlock();
+    this->constructBlock();
 }
 
 int adder::getBlockWidth() const { return BLOCK_WIDTH; }
@@ -19,3 +19,7 @@ int adder::getInPortsCount() const { return IN_PORTS_COUNT; }
 int adder::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
 QString adder::getBlockName() const { return BLOCK_NAME; }
+
+QString adder::getInPortLabel(int index) const { return IN_PORTS_LABELS[index]; }
+
+QString adder::getOutPortLabel(int index) const { return OUT_PORTS_LABELS[index]; }

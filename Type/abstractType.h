@@ -4,6 +4,7 @@
 #include <QString>
 #include <QGraphicsItem>
 
+// abstraktni trida pro typy
 class abstractType {
 private:
     bool valuesSet = false;

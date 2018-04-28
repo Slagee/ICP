@@ -1,24 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "ui_mainwindow.h"
-#include <QMessageBox>
 #include <QDebug>
 #include <QCursor>
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include <QDialog>
 #include <QtGui>
-#include <QLine>
-#include <QGraphicsSceneMouseEvent>
+
+#include "ui_mainwindow.h"
 #include "Block/abstractBlock.h"
-#include "Block/adder.h"
-#include "Block/subtractor.h"
-#include "Port/port.h"
-#include "Wire/wire.h"
 
 namespace Ui { class MainWindow; }
-
+class abstractBlock;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 

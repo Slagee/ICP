@@ -24,29 +24,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    Block/abstractBlock.cpp \
     Block/adder.cpp \
     Block/subtractor.cpp \
-    Port/port.cpp \
-    Wire/wire.cpp \
-    Block/abstractBlock.cpp \
     Type/abstractType.cpp \
     Type/onedecimalnumber.cpp \
     Type/twodecimalnumbers.cpp \
-    Type/threedecimalnumbers.cpp
+    Type/threedecimalnumbers.cpp\
+    Port/port.cpp \
+    Wire/wire.cpp
+
 
 HEADERS += \
-        mainwindow.h \
+    mainwindow.h \
+    Port/port.h \
+    Block/abstractBlock.h \
     Block/adder.h \
     Block/subtractor.h \
-    Port/port.h \
-    Wire/wire.h \
-    Block/abstractBlock.h \
     Type/abstractType.h \
     Type/onedecimalnumber.h \
     Type/twodecimalnumbers.h \
-    Type/threedecimalnumbers.h
+    Type/threedecimalnumbers.h \
+    Wire/wire.h
 
 FORMS += \
         mainwindow.ui

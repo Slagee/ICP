@@ -1,77 +1,48 @@
 #include "wire.h"
-#include "mainwindow.h"
 
-wire::wire(int x1, int y1, int x2, int y2, QGraphicsScene *parent) {
-    shiftStartX = 0;
-    shiftStartY = 0;
-    shiftEndX = 0;
-    shiftEndY = 0;
+wire::wire(QGraphicsScene *parent) { this->myParent = parent; }
 
-    dragFinished = false;
-    startPort = nullptr;
-    endPort = nullptr;
-    myParent = parent;
-}
+QRectF wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(), this->myParent->height()); }
 
-QRectF wire::boundingRect() const {
-
-    return QRectF(0, 0, myParent->width(), myParent->height());
-/* kdyz se da bounding rect presne, tak se pri rychlych poybech zustava stara cara...
-    int x1, x2, y1, y2;
-    if (startPort != nullptr && endPort != nullptr) {
-        x1 = this->startPort->x() + shiftStartX + this->startPort->getPortRadius();
-        y1 = this->startPort->y() + shiftStartY + this->startPort->getPortRadius();
-        x2 = this->endPort->x() + shiftEndX + this->endPort->getPortRadius();
-        y2 = this->endPort->y() + shiftEndY + this->endPort->getPortRadius();
-     } else if (!dragFinished) {
-
-        MainWindow *w = qobject_cast<MainWindow *>(myParent->parent());
-        QPoint mouse = w->mapFromGlobal(QCursor::pos());
-
-        if (startPort != nullptr) {
-            x1 = this->startPort->x() + shiftStartX + this->startPort->getPortRadius();
-            y1 = this->startPort->y() + shiftStartY + this->startPort->getPortRadius();
-            x2 = mouse.x() - w->toolBarWidth;
-            y2 = mouse.y() - w->menuHeight;
-        } else if (endPort != nullptr) {
-            x1 = mouse.x() - w->toolBarWidth;
-            y1 = mouse.y() - w->menuHeight;
-            x2 = this->endPort->x() + shiftEndX + this->endPort->getPortRadius();
-            y2 = this->endPort->y() + shiftEndY + this->endPort->getPortRadius();
-        }
-    }
-
-    int x,y,wr,hr;
-
-    (x1 < x2) ? x = x1 - 10 : x = x2 - 10;
-    (y1 < y2) ? y = y1 - 10 : y = y2 - 10;
-
-    wr = abs(x1 - x2) + 20;
-    hr = abs(y1 - y2) + 20;
-    return QRectF(x,y,wr,hr);
-*/
-}
 void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
 
-    if (startPort != nullptr && endPort != nullptr) {
-        painter->drawLine(this->startPort->x() + shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + shiftStartY + this->startPort->getPortRadius(), this->endPort->x() + shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + shiftEndY + this->endPort->getPortRadius());
-     } else if (!dragFinished) {
+    // kdyz je drat z portu do portu
+    if (this->startPort != nullptr && this->endPort != nullptr) {
+        painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
 
-        MainWindow *w = qobject_cast<MainWindow *>(myParent->parent());
-        QPoint mouse = w->mapFromGlobal(QCursor::pos());
+    // kdyz je z portu k mysi
+    } else if (!this->dragFinished) {
+        // ziskani ukazatele na okno
+        MainWindow *window = qobject_cast<MainWindow *>(this->myParent->parent());
 
-        if (startPort != nullptr) {
-            painter->drawLine(this->startPort->x() + shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + shiftStartY + this->startPort->getPortRadius(), mouse.x() - w->toolBarWidth, mouse.y() - w->menuHeight);
-        } else if (endPort != nullptr) {
-            painter->drawLine(mouse.x() - w->toolBarWidth, mouse.y() - w->menuHeight, this->endPort->x() + shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + shiftEndY + this->endPort->getPortRadius());
+        //zjisteni polohy mysi v okne
+        QPoint mouse = window->mapFromGlobal(QCursor::pos());
+
+        // kdyz se drat tahne z in-portu
+        if (this->startPort != nullptr) {
+            painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), mouse.x() - window->toolBarWidth, mouse.y() - window->menuHeight);
+
+        // kdyz se drat tahne z out-portu
+        } else if (this->endPort != nullptr) {
+            painter->drawLine(mouse.x() - window->toolBarWidth, mouse.y() - window->menuHeight, this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
         }
     }
 }
 
-void wire::setStartPort(port *port) { startPort = port; }
+void wire::setStartPort(port *port) { this->startPort = port; }
 
-void wire::setEndPort(port *port) { endPort = port; }
+void wire::setEndPort(port *port) { this->endPort = port; }
 
-port *wire::getStartPort() { return startPort; }
+port *wire::getStartPort() { return this->startPort; }
 
-port *wire::getEndPort() { return endPort; }
+port *wire::getEndPort() { return this->endPort; }
+
+void wire::setDragFinished(bool value) { this->dragFinished = value; }
+
+void wire::setShiftStartX(int value) { this->shiftStartX = value; }
+
+void wire::setShiftStartY(int value) { this->shiftStartY = value; }
+
+void wire::setShiftEndX(int value) { this->shiftEndX = value; }
+
+void wire::setShiftEndY(int value) { this->shiftEndY = value; }
