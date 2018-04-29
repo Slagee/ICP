@@ -36,8 +36,27 @@ void port::setInPort(bool value) { this->inPort = value; }
 
 bool port::getInPort() { return this->inPort; }
 
+wire *port::getWire() { return this->portWire; }
+
+abstractType *port::getDataType() { return this->dataType; }
+
+QString port::createToolTip() {
+    QString toolTip = "";
+    toolTip += this->getDataType()->getValueName(0);
+    toolTip += ": ";
+    toolTip += QString::number(this->getDataType()->getValue(0));
+    for (int i = 1; i < this->getDataType()->getValuesLength(); i++) {
+        toolTip += "\n";
+        toolTip += this->getDataType()->getValueName(i);
+        toolTip += ": ";
+        toolTip += QString::number(this->getDataType()->getValue(i));
+    }
+    return toolTip;
+}
+
 void port::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
     this->onMouse = true;
+    this->setToolTip(this->createToolTip());
     this->update();
     QGraphicsItem::hoverEnterEvent(event);
 }
@@ -68,6 +87,13 @@ void port::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     QDrag *drag = new QDrag(event->widget());
     QMimeData *mime = new QMimeData;
     drag->setMimeData(mime);
+
+    // kdyz v portu je drat, tak se znici
+    if (this->portWire != nullptr) {
+        this->portWire->getOtherPort(this)->portWire = nullptr;
+        delete this->portWire;
+        this->portWire = nullptr;
+    }
 
     // vytvoreni dratu
     this->portWire = new wire(myParent->myParent);

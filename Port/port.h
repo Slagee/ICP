@@ -8,6 +8,7 @@
 #include <QtWidgets>
 #include <QColor>
 #include <QDragEnterEvent>
+#include <QToolTip>
 
 #include "Type/abstractType.h"
 #include "Type/onedecimalnumber.h"
@@ -63,6 +64,10 @@ public:
     //metody pro nastaveni vstupniho portu a zjisteni zdali se jedno o in-port/out-port
     void setInPort(bool value);
     bool getInPort();
+
+    wire *getWire();
+    abstractType *getDataType();
+    QString createToolTip();
 
 protected:
 

@@ -45,6 +45,7 @@ public:
     // metody pro ziskani ukazatele na in-port/out-port
     port *getStartPort();
     port *getEndPort();
+    port *getOtherPort(port *somePort);
 
     // metoda pro nastaveni, ze bylo tahnuti dratu ukonceno
     void setDragFinished(bool value);
@@ -54,5 +55,9 @@ public:
     void setShiftStartY(int value);
     void setShiftEndX(int value);
     void setShiftEndY(int value);
+
+    // QGraphicsItem interface
+protected:
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
 };
 #endif // WIRE_H

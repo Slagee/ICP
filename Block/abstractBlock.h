@@ -10,11 +10,16 @@
 
 #include "../Port/port.h"
 
+class port;
+
 // abstraktni trida pro bloky
 class abstractBlock : public QGraphicsItemGroup {
 private:
     // konstanta pro upravu pozice portu na bloku
     const int TOP_BOTTOM_SPACING = -5;
+
+    // je blok propocitany...
+    bool calculated = false;
 
 public:
     // prvotni pozice bloku po natazeni na canvas
@@ -41,6 +46,12 @@ public:
     virtual QString getBlockName() const = 0;
     virtual QString getInPortLabel(int index) const = 0;
     virtual QString getOutPortLabel(int index) const = 0;
+    virtual void doCalculation() = 0;
+
+    port *getOutPort(int index);
+    port *getInPort(int index);
+    void setCalculated(bool value);
+    bool getCalculated();
 };
 
 #endif // ABSTRACTBLOCK_H
