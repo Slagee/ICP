@@ -1,6 +1,9 @@
 #include "wire.h"
 
-wire::wire(QGraphicsScene *parent) { this->myParent = parent; }
+wire::wire(QGraphicsScene *parent) {
+    this->myParent = parent;
+    this->setAcceptHoverEvents(true);
+}
 
 QRectF wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(), this->myParent->height()); }
 
@@ -37,6 +40,12 @@ port *wire::getStartPort() { return this->startPort; }
 
 port *wire::getEndPort() { return this->endPort; }
 
+port *wire::getOtherPort(port *somePort) {
+    if (somePort == this->startPort) { return this->endPort; }
+    if (somePort == this->endPort) { return this->startPort; }
+    return nullptr;
+}
+
 void wire::setDragFinished(bool value) { this->dragFinished = value; }
 
 void wire::setShiftStartX(int value) { this->shiftStartX = value; }
@@ -46,3 +55,9 @@ void wire::setShiftStartY(int value) { this->shiftStartY = value; }
 void wire::setShiftEndX(int value) { this->shiftEndX = value; }
 
 void wire::setShiftEndY(int value) { this->shiftEndY = value; }
+
+void wire::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
+    this->setToolTip(this->getStartPort()->createToolTip());
+    this->update();
+    QGraphicsItem::hoverEnterEvent(event);
+}

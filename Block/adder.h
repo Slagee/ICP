@@ -27,6 +27,7 @@ public:
     QString getBlockName() const;
     QString getInPortLabel(int index) const;
     QString getOutPortLabel(int index) const;
+    void doCalculation();
 };
 
 #endif // ADDER_H

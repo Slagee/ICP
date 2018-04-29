@@ -57,3 +57,11 @@ void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->drawText(blockBox, this->getBlockName(), blockNameOptions);
     painter->drawRect(this->startX, this->startY, this->getBlockWidth(), this->getBlockHeight());
 }
+
+port *abstractBlock::getOutPort(int index) { return qgraphicsitem_cast<port *>(this->childItems()[index + this->getInPortsCount()]); }
+
+port *abstractBlock::getInPort(int index) { return qgraphicsitem_cast<port *>(this->childItems()[index]); }
+
+void abstractBlock::setCalculated(bool value) { this->calculated = value; }
+
+bool abstractBlock::getCalculated() { return this->calculated; }
