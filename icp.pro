@@ -34,6 +34,7 @@ SOURCES += \
     Type/twodecimalnumbers.cpp \
     Type/threedecimalnumbers.cpp\
     Port/port.cpp \
+    Wire/wire.cpp \
     values.cpp
 
 

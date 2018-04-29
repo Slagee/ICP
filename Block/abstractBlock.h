@@ -10,6 +10,10 @@
 
 #include "../Port/port.h"
 
+class wire;
+class port;
+class abstractBlock;
+
 // abstraktni trida pro bloky
 class abstractBlock : public QGraphicsItemGroup {
 private:
