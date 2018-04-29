@@ -26,6 +26,8 @@ void Values::on_pushButton_clicked()
 {
     for(int i = 0; i < blockPort->dataType->getValuesLength(); i++) {
             blockPort->dataType->setValue(i, groupBox->findChild<QLineEdit *>(QString::number(i))->text().toDouble());
+            blockPort->dataType->setValuesSet(true);
+            blockPort->update();
     }
     this->done(1);
 }

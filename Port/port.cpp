@@ -20,6 +20,8 @@ void port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     (this->inPort) ? brush.setColor(this->WIRELESS_UNSET_IN_PORT_COLOR) : brush.setColor(this->WIRELESS_OUT_PORT_COLOR);
 
+    if (this->dataType->getValuesSet()) { brush.setColor(this->WIRELESS_SET_IN_PORT_COLOR); }
+
     if (this->portWire != nullptr) { brush.setColor(this->WIRED_IN_OUT_PORT_COLOR); }
 
     if (this->onMouse || this->dragOver) { brush.setColor(this->HOVER_IN_OUT_PORT_COLOR); }

@@ -208,10 +208,14 @@ void MainWindow::on_actionNew_triggered() {
 // vypocet -> menu Run -> Calculate
 void MainWindow::on_actionCalculate_triggered() {
     if (this->findCycles()) {
-        qDebug("jsou tu cykly");
+        qDebug("Je tu cyklus!");
     } else {
-        qDebug("nejsou tu cykyl");
+        if (this->checkWirelessInPorts()) {
+            this->setBlocksNotCalculated();
+            this->calculate();
+            qDebug("Vypocet hotovy!");
+        } else {
+            qDebug("Musis vyplnit vsechny in-porty bez dratu...");
+        }
     }
 }
-
-
