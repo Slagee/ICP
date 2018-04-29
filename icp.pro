@@ -24,15 +24,36 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    Block/block.cpp
+    main.cpp \
+    mainwindow.cpp \
+    Block/abstractBlock.cpp \
+    Block/adder.cpp \
+    Block/subtractor.cpp \
+    Type/abstractType.cpp \
+    Type/onedecimalnumber.cpp \
+    Type/twodecimalnumbers.cpp \
+    Type/threedecimalnumbers.cpp\
+    Port/port.cpp \
+    Wire/wire.cpp \
+    values.cpp
+
 
 HEADERS += \
-        mainwindow.h \
-    Block/block.h
+    mainwindow.h \
+    Port/port.h \
+    Block/abstractBlock.h \
+    Block/adder.h \
+    Block/subtractor.h \
+    Type/abstractType.h \
+    Type/onedecimalnumber.h \
+    Type/twodecimalnumbers.h \
+    Type/threedecimalnumbers.h \
+    Wire/wire.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    values.ui
+
+QMAKE_CXXFLAGS += -std=gnu++14
 
 DISTFILES +=
