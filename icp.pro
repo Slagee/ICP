@@ -34,7 +34,6 @@ SOURCES += \
     Type/twodecimalnumbers.cpp \
     Type/threedecimalnumbers.cpp\
     Port/port.cpp \
-    Wire/wire.cpp \
     values.cpp
 
 
@@ -53,6 +52,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     values.ui
+
+QMAKE_CXXFLAGS += -std=gnu++14
 
 QMAKE_CXXFLAGS += -std=gnu++14
 

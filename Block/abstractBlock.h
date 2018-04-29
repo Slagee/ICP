@@ -9,7 +9,6 @@
 #include <QTextOption>
 
 #include "../Port/port.h"
-#include "values.h"
 
 // abstraktni trida pro bloky
 class abstractBlock : public QGraphicsItemGroup {
