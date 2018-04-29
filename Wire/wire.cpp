@@ -9,6 +9,11 @@ QRectF wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(),
 
 void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
 
+    QPen pen;
+    pen.setWidth(WIRE_THICKNESS);
+    painter->setPen(pen);
+    painter->setRenderHint(QPainter::Antialiasing);
+
     // kdyz je drat z portu do portu
     if (this->startPort != nullptr && this->endPort != nullptr) {
         painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());

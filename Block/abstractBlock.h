@@ -20,6 +20,13 @@ private:
     // konstanta pro upravu pozice portu na bloku
     const int TOP_BOTTOM_SPACING = -5;
 
+    const int LABELS_SPACING = 3;
+    const int BLOCK_NAME_SIZE = 14;
+    const int BLOCK_LABEL_SIZE = 10;
+    const bool BLOCK_NAME_BOLD = true;
+    const QString BLOCK_TEXT_FONT = "Sans Serif";
+    const int BLOCK_BORDER_THICKNESS = 2;
+
     // je blok propocitany...
     bool calculated = false;
 

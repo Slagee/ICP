@@ -15,7 +15,7 @@ private:
     const QString IN_PORTS_LABELS[IN_PORTS_COUNT] = {"1.1", "2.1"};
     const static int OUT_PORTS_COUNT = 1;
     const QString OUT_PORTS_LABELS[OUT_PORTS_COUNT] = {"1.1"};
-    const QString BLOCK_NAME = "SUBTRACTOR";
+    const QString BLOCK_NAME = "SUB";
 
 public:
     // metody pro praci s blokem - konstruktor + metody pro ziskani informaci o bloku

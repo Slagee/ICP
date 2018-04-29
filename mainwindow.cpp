@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // nastaveni velikosti a umisteni sceny
     this->scene->setSceneRect(0, 0, this->width() - this->toolBarWidth - this->magicConstant1, this->height() - this->menuHeight - this->magicConstant2);
-
+    this->scene->setBackgroundBrush(QBrush(QColor(210,210,210), Qt::SolidPattern));
     this->ui->graphicsView->setScene(this->scene);
     setCentralWidget( this->ui->graphicsView );
 
@@ -29,12 +29,6 @@ MainWindow::~MainWindow() {
 // kliknuti na tool1 prida adder doprostred canvasu
 void MainWindow::on_actionadder_triggered() {
     this->scene->addItem(new adder(this->width() / 2, this->height() / 2, this->scene));
-    qDebug() << "itemu tu je " << scene->items().length();
-    qDebug() << "deti mam " << scene->children().size();
-
-    for (int i = 0; i < scene->items().length(); i++) {
-        qDebug() << i << " je " << scene->items().at(i)->group();
-    }
 }
 
 // kliknuti na tool2 prida subtractor doprostred canvasu

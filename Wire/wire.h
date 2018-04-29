@@ -12,6 +12,8 @@ class port;
 // trida pro drat - zacatek (start) ma vzdy v in-portu a konec (end) v out-portu
 class wire : public QGraphicsItem  {
 private:
+    const int WIRE_THICKNESS = 3;
+
     // ukazatele na in-port/out-port
     port *startPort = nullptr;
     port *endPort = nullptr;

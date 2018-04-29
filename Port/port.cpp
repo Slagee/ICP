@@ -28,6 +28,8 @@ void port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     // vykresleni portu
     painter->setBrush(brush);
+    painter->setPen(Qt::NoPen);
+    painter->setRenderHint(QPainter::Antialiasing);
     painter->drawEllipse(portBox);
 }
 
@@ -57,8 +59,8 @@ QString port::createToolTip() {
 
 void port::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
     this->onMouse = true;
-    this->setToolTip(this->createToolTip());
     this->update();
+    this->setToolTip(this->createToolTip());
     QGraphicsItem::hoverEnterEvent(event);
 }
 
@@ -226,6 +228,7 @@ void port::dropEvent(QGraphicsSceneDragDropEvent *event) {
         }
     }
 
+    this->setAcceptHoverEvents(true);
     this->update();
     Q_UNUSED(event);
 }
