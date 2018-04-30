@@ -61,13 +61,14 @@ void port::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
     this->onMouse = true;
     this->update();
     this->setToolTip(this->createToolTip());
-    QGraphicsItem::hoverEnterEvent(event);
+    //QGraphicsItem::hoverEnterEvent(event);
 }
 
 void port::hoverLeaveEvent(QGraphicsSceneHoverEvent *event) {
     this->onMouse = false;
     this->update();
-    QGraphicsItem::hoverLeaveEvent(event);
+    setCursor(Qt::OpenHandCursor);
+    //QGraphicsItem::hoverLeaveEvent(event);
 }
 
 void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
@@ -81,6 +82,7 @@ void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             values.setModal(true);
             values.exec();
         }
+        //QGraphicsItem::mousePressEvent(event);
     } else {
         setCursor(Qt::ClosedHandCursor);
         Q_UNUSED(event);
@@ -90,7 +92,7 @@ void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 void port::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     setCursor(Qt::OpenHandCursor);
     this->update();
-    QGraphicsItem::mouseReleaseEvent(event);
+    //QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void port::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
@@ -234,7 +236,9 @@ void port::dropEvent(QGraphicsSceneDragDropEvent *event) {
         }
     }
 
+    setCursor(Qt::OpenHandCursor);
     this->setAcceptHoverEvents(true);
     this->update();
     Q_UNUSED(event);
 }
+

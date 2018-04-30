@@ -33,12 +33,15 @@ private slots:
 
     void on_actionCalculate_triggered();
 
+    void on_actionStep_Calculation_triggered();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     abstractBlock *block;
     QRectF *middle;
     int lastTool;
+    QToolBar *stepCalculations;
 
     int countBlocks();
     abstractBlock *getBlock(int index);
@@ -50,7 +53,17 @@ private:
     bool readyForCalculation(abstractBlock *block);
     void setBlocksNotCalculated();
     bool checkWirelessInPorts();
-    void sendResultsByWire(abstractBlock *block) ;
+    void sendResultsByWire(abstractBlock *block);
+    QToolBar *createToolbarForStelCalculations();
+    void removeToolbarForStelCalculations(QToolBar *stepCalculations);
+    void nextStep();
+    void finishCalculations();
+    void endCalculations();
+    void setBlocksForStepCalculations(QColor color);
+    abstractBlock *getNextBlockForStepCalculations();
+    void setPreviousLastCalculatedBlockColor();
+    void setNextBlockForStepCalculations();
+    bool checkEndOfStepCalculations();
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event);

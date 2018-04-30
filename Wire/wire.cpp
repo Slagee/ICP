@@ -1,8 +1,10 @@
 #include "wire.h"
+#include <QToolTip>
 
 wire::wire(QGraphicsScene *parent) {
     this->myParent = parent;
     this->setAcceptHoverEvents(true);
+    this->setToolTip("test");
 }
 
 QRectF wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(), this->myParent->height()); }
@@ -62,7 +64,8 @@ void wire::setShiftEndX(int value) { this->shiftEndX = value; }
 void wire::setShiftEndY(int value) { this->shiftEndY = value; }
 
 void wire::hoverEnterEvent(QGraphicsSceneHoverEvent *event) {
+    qDebug("hover...");
     this->setToolTip(this->getStartPort()->createToolTip());
     this->update();
-    QGraphicsItem::hoverEnterEvent(event);
+    QGraphicsLineItem::hoverEnterEvent(event);
 }

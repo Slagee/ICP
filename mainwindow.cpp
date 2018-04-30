@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->ui->graphicsView->setScene(this->scene);
     setCentralWidget( this->ui->graphicsView );
 
+    this->stepCalculations = this->createToolbarForStelCalculations();
+    this->stepCalculations->hide();
+
     this->lastTool = 0;
 }
 
@@ -170,6 +173,7 @@ void MainWindow::setBlocksNotCalculated() {
 }
 
 bool MainWindow::checkWirelessInPorts() {
+    qDebug() << "bloku je " << this->countBlocks();
     for (int i = 0; i < this->countBlocks(); i++) {
         for (int j = 0; j < this->getBlock(i)->getInPortsCount(); j++) {
             if (this->getBlock(i)->getInPort(j)->getWire() == nullptr) {
@@ -201,7 +205,9 @@ void MainWindow::on_actionNew_triggered() {
 
 // vypocet -> menu Run -> Calculate
 void MainWindow::on_actionCalculate_triggered() {
-    if (this->findCycles()) {
+    if (this->countBlocks() == 0) {
+        qDebug("neni co pocitat...");
+    } else if (this->findCycles()) {
         qDebug("Je tu cyklus!");
     } else {
         if (this->checkWirelessInPorts()) {
@@ -212,4 +218,123 @@ void MainWindow::on_actionCalculate_triggered() {
             qDebug("Musis vyplnit vsechny in-porty bez dratu...");
         }
     }
+}
+
+void MainWindow::on_actionStep_Calculation_triggered() {
+    if (this->countBlocks() == 0) {
+        qDebug("neni co pocitat...");
+    } else if (this->findCycles()) {
+        qDebug("cykly tu mas");
+    } else {
+        if (this->checkWirelessInPorts()) {
+            this->setBlocksForStepCalculations(this->getBlock(0)->getNotCalculatedBorderColor());
+            this->setBlocksNotCalculated();
+            this->setNextBlockForStepCalculations();
+            if (!this->checkEndOfStepCalculations()) {
+                this->stepCalculations->show();
+            } else {
+                qDebug("hotovo!");
+            }
+        } else {
+            qDebug("nemas to vyplneny");
+        }
+    }
+}
+
+QToolBar *MainWindow::createToolbarForStelCalculations() {
+    QToolBar *stepCalculations = new QToolBar();
+
+    QAction *nextStep = new QAction(tr("&Next step"), this);
+    connect(nextStep, &QAction::triggered, this, &MainWindow::nextStep);
+    stepCalculations->addAction(nextStep);
+
+    QAction *finishCalculations = new QAction(tr("&Finish calculations"), this);
+    connect(finishCalculations, &QAction::triggered, this, &MainWindow::finishCalculations);
+    stepCalculations->addAction(finishCalculations);
+
+    QAction *endCalculations = new QAction(tr("&Finish calculations"), this);
+    connect(endCalculations, &QAction::triggered, this, &MainWindow::endCalculations);
+    stepCalculations->addAction(endCalculations);
+
+    this->addToolBar(stepCalculations);
+    return stepCalculations;
+}
+
+void MainWindow::removeToolbarForStelCalculations(QToolBar *stepCalculations) { this->removeToolBar(stepCalculations); }
+
+void MainWindow::nextStep() {
+    abstractBlock *nextBlock = this->getNextBlockForStepCalculations();
+    nextBlock->doCalculation();
+    this->sendResultsByWire(nextBlock);
+    nextBlock->setCalculated(true);
+    this->setPreviousLastCalculatedBlockColor();
+    nextBlock->setBlockBorderColor(nextBlock->getLastCalculatedBorderColor());
+    this->setNextBlockForStepCalculations();
+    if (this->checkEndOfStepCalculations()) {
+        this->setBlocksForStepCalculations(nextBlock->getDefaultBorderColor());
+        this->stepCalculations->hide();
+        qDebug("vypocitano!");
+    }
+}
+
+void MainWindow::finishCalculations() {
+    this->calculate();
+    this->setBlocksForStepCalculations(this->getBlock(0)->getDefaultBorderColor());
+    this->stepCalculations->hide();
+    qDebug("finished");
+}
+
+void MainWindow::endCalculations() {
+    this->setBlocksForStepCalculations(this->getBlock(0)->getDefaultBorderColor());
+    this->stepCalculations->hide();
+}
+
+void MainWindow::setBlocksForStepCalculations(QColor color) {
+    for (int i = 0; i < this->countBlocks(); i++) {
+        this->getBlock(i)->setBlockBorderColor(color);
+    }
+}
+
+abstractBlock *MainWindow::getNextBlockForStepCalculations() {
+    bool blockFound = false;
+    abstractBlock *block = nullptr;
+    int k = 0;
+    while (k < this->countBlocks() && !blockFound) {
+        if (this->getBlock(k)->getBlockBorderColor() == this->getBlock(k)->getActualBorderColor()) {
+            block = this->getBlock(k);
+            blockFound = true;
+        }
+        k++;
+    }
+    return block;
+}
+
+void MainWindow::setPreviousLastCalculatedBlockColor() {
+    for (int i = 0; i < this->countBlocks(); i++) {
+        if (this->getBlock(i)->getBlockBorderColor() == this->getBlock(i)->getLastCalculatedBorderColor()) {
+            this->getBlock(i)->setBlockBorderColor(this->getBlock(i)->getCalculated());
+        }
+    }
+}
+
+void MainWindow::setNextBlockForStepCalculations() {
+    bool blockMarked = false;
+    for (int i = 0; i < this ->countBlocks(); i ++) {
+        if (this->getBlock(i)->getBlockBorderColor() == this->getBlock(i)->getNotCalculatedBorderColor()) {
+            if (this->readyForCalculation(this->getBlock(i))) {
+                this->getBlock(i)->setBlockBorderColor(this->getBlock(i)->getActualBorderColor());
+                blockMarked = true;
+            }
+        }
+        if (blockMarked) { i = this->countBlocks(); }
+    }
+}
+
+bool MainWindow::checkEndOfStepCalculations() {
+    for (int i = 0; i < this->countBlocks(); i++) {
+        if (this->getBlock(i)->getBlockBorderColor() == this->getBlock(i)->getActualBorderColor()) {
+            return false;
+        }
+    }
+    return true;
 }

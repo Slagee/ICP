@@ -47,15 +47,15 @@ void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     // cyklus pro nastaveni pripadnych novych zacatku/koncu pripadny dratu na bloku
     for (int i = 0; i < this->childItems().length(); i++) {
         blockPort = qgraphicsitem_cast<port *>(this->childItems()[i]);
-        if (blockPort->portWire != nullptr) {
+        if (blockPort->getWire() != nullptr) {
             if (blockPort->getInPort()) {
-                blockPort->portWire->setShiftStartX(this->x());
-                blockPort->portWire->setShiftStartY(this->y());
-                blockPort->portWire->update();
+                blockPort->getWire()->setShiftStartX(this->x());
+                blockPort->getWire()->setShiftStartY(this->y());
+                blockPort->getWire()->update();
             } else {
-                blockPort->portWire->setShiftEndX(this->x());
-                blockPort->portWire->setShiftEndY(this->y());
-                blockPort->portWire->update();
+                blockPort->getWire()->setShiftEndX(this->x());
+                blockPort->getWire()->setShiftEndY(this->y());
+                blockPort->getWire()->update();
             }
         }
     }
@@ -83,6 +83,7 @@ void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->drawText(blockBox, this->getBlockName(), blockNameOptions);
     QPen pen;
     pen.setWidth(BLOCK_BORDER_THICKNESS);
+    pen.setColor(blockBorderColor);
     painter->setPen(pen);
     painter->drawRect(this->startX, this->startY, this->getBlockWidth(), this->getBlockHeight());
 }
@@ -94,3 +95,17 @@ port *abstractBlock::getInPort(int index) { return qgraphicsitem_cast<port *>(th
 void abstractBlock::setCalculated(bool value) { this->calculated = value; }
 
 bool abstractBlock::getCalculated() { return this->calculated; }
+
+void abstractBlock::setBlockBorderColor(QColor color) { this->blockBorderColor = color; }
+
+QColor abstractBlock::getBlockBorderColor() { return this->blockBorderColor; }
+
+QColor abstractBlock::getDefaultBorderColor() { return this->DEFAULT_BLOCK_COLOR; }
+
+QColor abstractBlock::getActualBorderColor() { return this->ACTUAL_BLOCK_COLOR; }
+
+QColor abstractBlock::getNotCalculatedBorderColor() { return this->NOT_CALCULATED_BLOCK_COLOR; }
+
+QColor abstractBlock::getCalculatedBorderColor() { return this->CALCULATED_BLOCK_COLOR; }
+
+QColor abstractBlock::getLastCalculatedBorderColor() { return this->LAST_CALCULATED_BLOCK_COLOR; }

@@ -2,7 +2,7 @@
 #define PORT_H
 
 #include <QPainter>
-#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QtWidgets>
@@ -47,14 +47,13 @@ private:
     bool onMouse = false;
     bool dragOver = false;
 
-
-public:
-
     // ukazatel na drat
     wire *portWire = nullptr;
 
     // ukazatel na typ s daty
     abstractType *dataType = nullptr;
+
+public:
 
     // ukazatel na otce
     abstractBlock *myParent = nullptr;
@@ -82,14 +81,18 @@ public:
 protected:
 
     // prace s udalostmi...
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+
+
+    // QGraphicsItem interface
+protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 };
 
 class Values : public QDialog

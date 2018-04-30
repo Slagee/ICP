@@ -26,14 +26,23 @@ private:
     const bool BLOCK_NAME_BOLD = true;
     const QString BLOCK_TEXT_FONT = "Sans Serif";
     const int BLOCK_BORDER_THICKNESS = 2;
+    const QColor DEFAULT_BLOCK_COLOR = Qt::black;
+    const QColor ACTUAL_BLOCK_COLOR = Qt::yellow;
+    const QColor NOT_CALCULATED_BLOCK_COLOR = Qt::red;
+    const QColor CALCULATED_BLOCK_COLOR = Qt::green;
+    const QColor LAST_CALCULATED_BLOCK_COLOR = Qt::blue;
 
     // je blok propocitany...
     bool calculated = false;
+
+    QColor blockBorderColor = Qt::black;
 
 public:
     // prvotni pozice bloku po natazeni na canvas
     int startX = 0;
     int startY = 0;
+
+
 
     // ukazatel na otce
     QGraphicsScene *myParent = nullptr;
@@ -61,6 +70,13 @@ public:
     port *getInPort(int index);
     void setCalculated(bool value);
     bool getCalculated();
+    void setBlockBorderColor(QColor color);
+    QColor getBlockBorderColor();
+    QColor getDefaultBorderColor();
+    QColor getActualBorderColor();
+    QColor getNotCalculatedBorderColor();
+    QColor getCalculatedBorderColor();
+    QColor getLastCalculatedBorderColor();
 };
 
 #endif // ABSTRACTBLOCK_H

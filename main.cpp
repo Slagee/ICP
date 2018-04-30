@@ -9,6 +9,10 @@ int main(int argc, char *argv[]) {
 
     // okno...
     MainWindow w;
+
+    //QDesktopWidget dw;
+    //w.setFixedSize(dw.width() * 0.7,dw.height() * 0.7);
+    //w.setFixedSize(1280, 720);
     w.show();
 
     return a.exec();

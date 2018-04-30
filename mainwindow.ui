@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>890</width>
-    <height>583</height>
+    <width>893</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>-1</x>
-      <y>0</y>
+      <y>-1</y>
       <width>801</width>
       <height>531</height>
      </rect>
@@ -45,7 +45,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>890</width>
+     <width>893</width>
      <height>25</height>
     </rect>
    </property>
@@ -68,6 +68,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionnapoveda"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Calculate"/>
@@ -120,6 +121,11 @@
   <action name="actionNew">
    <property name="text">
     <string>&amp;New</string>
+   </property>
+  </action>
+  <action name="actionnapoveda">
+   <property name="text">
+    <string>&amp;Help</string>
    </property>
   </action>
  </widget>

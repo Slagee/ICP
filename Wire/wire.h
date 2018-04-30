@@ -2,7 +2,7 @@
 #define WIRE_H
 
 #include <QPainter>
-#include <QGraphicsItem>
+#include <QGraphicsLineItem>
 #include <QDebug>
 
 #include "mainwindow.h"
@@ -10,7 +10,7 @@
 class port;
 
 // trida pro drat - zacatek (start) ma vzdy v in-portu a konec (end) v out-portu
-class wire : public QGraphicsItem  {
+class wire : public QGraphicsLineItem  {
 private:
     const int WIRE_THICKNESS = 3;
 
@@ -58,8 +58,8 @@ public:
     void setShiftEndX(int value);
     void setShiftEndY(int value);
 
-    // QGraphicsItem interface
 protected:
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+
 };
 #endif // WIRE_H

@@ -6,12 +6,12 @@ Values::Values(port *parentPort, QWidget *parent) : QDialog(parent), ui(new Ui::
     setWindowTitle("Fill in-port value/s");
     auto layout = new QVBoxLayout();
     blockPort = parentPort;
-    groupBox = new QGroupBox("Value of type: " + blockPort->dataType->getType(), this);
-    for(int i = 0; i < blockPort->dataType->getValuesLength(); i++) {
+    groupBox = new QGroupBox("Value of type: " + blockPort->getDataType()->getType(), this);
+    for(int i = 0; i < blockPort->getDataType()->getValuesLength(); i++) {
         auto groupLineLayout = new QHBoxLayout();
-        QLabel *lblLine = new QLabel(blockPort->dataType->getValueName(i)+ ": ");
+        QLabel *lblLine = new QLabel(blockPort->getDataType()->getValueName(i)+ ": ");
         line = new QLineEdit();
-        line->setText(QString::number(blockPort->dataType->getValue(i)));
+        line->setText(QString::number(blockPort->getDataType()->getValue(i)));
         line->setObjectName(QString::number(i));
         groupLineLayout->addWidget(lblLine);
         groupLineLayout->addWidget(line);
@@ -34,9 +34,9 @@ Values::~Values()
 
 void Values::on_pushButton_clicked()
 {
-    for(int i = 0; i < blockPort->dataType->getValuesLength(); i++) {
-            blockPort->dataType->setValue(i, this->findChild<QLineEdit *>(QString::number(i))->text().toDouble());
-            blockPort->dataType->setValuesSet(true);
+    for(int i = 0; i < blockPort->getDataType()->getValuesLength(); i++) {
+            blockPort->getDataType()->setValue(i, this->findChild<QLineEdit *>(QString::number(i))->text().toDouble());
+            blockPort->getDataType()->setValuesSet(true);
             blockPort->update();
     }
     this->done(1);
