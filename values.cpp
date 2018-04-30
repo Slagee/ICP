@@ -4,17 +4,26 @@ Values::Values(QWidget *parent) : QDialog(parent), ui(new Ui::Values)
 {
     ui->setupUi(this);
     setWindowTitle("Fill in-port value/s");
-    groupBox = new QGroupBox("Value of type: " +blockPort->dataType->getType());
-    groupBox->setParent(this);
-    int spacing = 50;
+    auto layout = new QVBoxLayout();
+    groupBox = new QGroupBox("Value of type: " +blockPort->dataType->getType(), this);
     for(int i = 0; i < blockPort->dataType->getValuesLength(); i++) {
-        line = new QLineEdit(groupBox);
+        auto groupLineLayout = new QHBoxLayout();
+        QLabel *lblLine = new QLabel(blockPort->dataType->getValueName(i)+ ": ");
+        line = new QLineEdit();
         line->setText(QString::number(blockPort->dataType->getValue(i)));
         line->setObjectName(QString::number(i));
-        line->move(0, spacing);
-        spacing = spacing+50;
+        groupLineLayout->addWidget(lblLine);
+        groupLineLayout->addWidget(line);
+        layout->addLayout(groupLineLayout);
     }
-   groupBox->resize(420, 200);
+    auto buttonLayout = new QHBoxLayout();
+    buttonLayout->addSpacing(200);
+    buttonLayout->addWidget(ui->pushButton_2);
+    buttonLayout->addWidget(ui->pushButton);
+    layout->addLayout(buttonLayout);
+    groupBox->resize(380, 120);
+    this->setLayout(layout);
+    this->layout()->setSpacing(5);
 }
 
 Values::~Values()
@@ -25,7 +34,7 @@ Values::~Values()
 void Values::on_pushButton_clicked()
 {
     for(int i = 0; i < blockPort->dataType->getValuesLength(); i++) {
-            blockPort->dataType->setValue(i, groupBox->findChild<QLineEdit *>(QString::number(i))->text().toDouble());
+            blockPort->dataType->setValue(i, this->findChild<QLineEdit *>(QString::number(i))->text().toDouble());
             blockPort->dataType->setValuesSet(true);
             blockPort->update();
     }

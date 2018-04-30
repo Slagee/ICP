@@ -11,8 +11,10 @@
 #include <QDialog>
 #include <QGroupBox>
 #include <QLineEdit>
-#include <QListWidget>
-#include <QGridLayout>
+#include <QMessageBox>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QToolTip>
 
 #include "Type/abstractType.h"
@@ -44,6 +46,7 @@ private:
     // promenne pro detekci ze se nad nim nachazi mys nebo ze se pres nej neco pretahuje
     bool onMouse = false;
     bool dragOver = false;
+
 
 public:
 

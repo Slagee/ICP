@@ -2,7 +2,7 @@
 
 port::port(abstractBlock *parent){
     this->myParent = parent;
-    this->dataType = new oneDecimalNumber(this);
+    this->dataType = new threeDecimalNumbers(this);
     this->setCursor(Qt::OpenHandCursor);
     this->setAcceptHoverEvents(true);
     this->setAcceptTouchEvents(true);
@@ -72,9 +72,15 @@ void port::hoverLeaveEvent(QGraphicsSceneHoverEvent *event) {
 
 void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     if(event->button()==Qt::RightButton){
-        Values values;
-        values.setModal(true);
-        values.exec();
+        if(this->portWire != nullptr){
+            QMessageBox errorBox;
+            errorBox.warning(0,"Error","Port is already connected!");
+            errorBox.setFixedSize(500,250);
+        } else {
+            Values values;
+            values.setModal(true);
+            values.exec();
+        }
     } else {
         setCursor(Qt::ClosedHandCursor);
         Q_UNUSED(event);
