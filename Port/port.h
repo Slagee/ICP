@@ -97,7 +97,7 @@ class Values : public QDialog
     Q_OBJECT
 
 public:
-    explicit Values(QWidget *parent = 0);
+    explicit Values(port *parentPort, QWidget *parent = 0);
     ~Values();
     QGroupBox *groupBox;
     QLineEdit *line;

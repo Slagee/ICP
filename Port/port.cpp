@@ -77,7 +77,7 @@ void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             errorBox.warning(0,"Error","Port is already connected!");
             errorBox.setFixedSize(500,250);
         } else {
-            Values values;
+            Values values(this);
             values.setModal(true);
             values.exec();
         }

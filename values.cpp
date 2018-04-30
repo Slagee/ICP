@@ -1,11 +1,12 @@
 #include "Port/port.h"
 
-Values::Values(QWidget *parent) : QDialog(parent), ui(new Ui::Values)
+Values::Values(port *parentPort, QWidget *parent) : QDialog(parent), ui(new Ui::Values)
 {
     ui->setupUi(this);
     setWindowTitle("Fill in-port value/s");
     auto layout = new QVBoxLayout();
-    groupBox = new QGroupBox("Value of type: " +blockPort->dataType->getType(), this);
+    blockPort = parentPort;
+    groupBox = new QGroupBox("Value of type: " + blockPort->dataType->getType(), this);
     for(int i = 0; i < blockPort->dataType->getValuesLength(); i++) {
         auto groupLineLayout = new QHBoxLayout();
         QLabel *lblLine = new QLabel(blockPort->dataType->getValueName(i)+ ": ");
