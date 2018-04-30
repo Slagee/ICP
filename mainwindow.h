@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QtGui>
+#include <QMessageBox>
 
 #include "ui_mainwindow.h"
 #include "Block/abstractBlock.h"
@@ -28,18 +29,15 @@ private slots:
     void on_actionadder_hovered();
     void on_actionsubtractor_hovered();
     void on_actionsubtractor_triggered();
-
     void on_actionNew_triggered();
-
     void on_actionCalculate_triggered();
-
     void on_actionStep_Calculation_triggered();
+
+    void on_actionnapoveda_triggered();
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    abstractBlock *block;
-    QRectF *middle;
     int lastTool;
     QToolBar *stepCalculations;
 

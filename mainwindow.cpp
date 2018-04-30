@@ -8,10 +8,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->scene = new QGraphicsScene(this);
 
     // promenned pro vyreseni spravne pozice sceny
-    this->toolBarWidth = 93;
+    this->toolBarWidth = 94;
     this->menuHeight = 25;
     this->magicConstant1 = 11;
-    this->magicConstant2 = 29;
+    this->magicConstant2 = 30;
 
     // nastaveni velikosti a umisteni sceny
     this->scene->setSceneRect(0, 0, this->width() - this->toolBarWidth - this->magicConstant1, this->height() - this->menuHeight - this->magicConstant2);
@@ -173,7 +173,6 @@ void MainWindow::setBlocksNotCalculated() {
 }
 
 bool MainWindow::checkWirelessInPorts() {
-    qDebug() << "bloku je " << this->countBlocks();
     for (int i = 0; i < this->countBlocks(); i++) {
         for (int j = 0; j < this->getBlock(i)->getInPortsCount(); j++) {
             if (this->getBlock(i)->getInPort(j)->getWire() == nullptr) {
@@ -198,33 +197,37 @@ void MainWindow::sendResultsByWire(abstractBlock *block) {
 
 // vycisteni canvasu --> menu File -> New
 void MainWindow::on_actionNew_triggered() {
-    while (this->scene->items().length() > 0) {
-        delete this->scene->items().at(0);
+    QMessageBox::StandardButton areYouSure;
+    areYouSure = QMessageBox::question(this, "Are you sure?", "Do you really want to discard this block scheme?", QMessageBox::Yes|QMessageBox::No);
+    if (areYouSure == QMessageBox::Yes) {
+        while (this->scene->items().length() > 0) {
+            delete this->scene->items().at(0);
+        }
     }
 }
 
 // vypocet -> menu Run -> Calculate
 void MainWindow::on_actionCalculate_triggered() {
     if (this->countBlocks() == 0) {
-        qDebug("neni co pocitat...");
+        QMessageBox::information(this, "Empty block scheme", "There is nothing to calculate...");
     } else if (this->findCycles()) {
-        qDebug("Je tu cyklus!");
+        QMessageBox::warning(this, "Cycle detected!", "You have to remove all cycles!");
     } else {
         if (this->checkWirelessInPorts()) {
             this->setBlocksNotCalculated();
             this->calculate();
-            qDebug("Vypocet hotovy!");
+            QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
         } else {
-            qDebug("Musis vyplnit vsechny in-porty bez dratu...");
+            QMessageBox::warning(this, "Unfilled IN-ports detected!", "You have to fill values for all wireless IN-ports!");
         }
     }
 }
 
 void MainWindow::on_actionStep_Calculation_triggered() {
     if (this->countBlocks() == 0) {
-        qDebug("neni co pocitat...");
+        QMessageBox::information(this, "Empty block scheme", "There is nothing to calculate...");
     } else if (this->findCycles()) {
-        qDebug("cykly tu mas");
+        QMessageBox::warning(this, "Cycle detected!", "You have to remove all cycles!");
     } else {
         if (this->checkWirelessInPorts()) {
             this->setBlocksForStepCalculations(this->getBlock(0)->getNotCalculatedBorderColor());
@@ -233,10 +236,10 @@ void MainWindow::on_actionStep_Calculation_triggered() {
             if (!this->checkEndOfStepCalculations()) {
                 this->stepCalculations->show();
             } else {
-                qDebug("hotovo!");
+                QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
             }
         } else {
-            qDebug("nemas to vyplneny");
+            QMessageBox::warning(this, "Unfilled IN-ports detected!", "You have to fill values for all wireless IN-ports!");
         }
     }
 }
@@ -273,7 +276,7 @@ void MainWindow::nextStep() {
     if (this->checkEndOfStepCalculations()) {
         this->setBlocksForStepCalculations(nextBlock->getDefaultBorderColor());
         this->stepCalculations->hide();
-        qDebug("vypocitano!");
+        QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
     }
 }
 
@@ -281,7 +284,7 @@ void MainWindow::finishCalculations() {
     this->calculate();
     this->setBlocksForStepCalculations(this->getBlock(0)->getDefaultBorderColor());
     this->stepCalculations->hide();
-    qDebug("finished");
+    QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
 }
 
 void MainWindow::endCalculations() {
@@ -337,4 +340,8 @@ bool MainWindow::checkEndOfStepCalculations() {
         }
     }
     return true;
+}
+
+void MainWindow::on_actionnapoveda_triggered() {
+    QMessageBox::information(this, "Help", "The application is used for creating/editing block schemas.\n\nYou can add new block by dragging from toolbar.\n\nYou can fill in-port values by rightclick on single port\nor you can fill all blocks in-ports by righclick on whole block.\n\nYou can delete block by rightclick on block.\n\nYou can calculate your scheme through run menu.\n\nYou can save or import your schema through file menu.\n\nPort colors indicates port status and functionality:\nred is for wireless in-port with not filled values\nblue is for wireless out-port\nblack is for wired in-port/out-port\ngreen is for wireless in-port witch filled values\nyellow is for focused in-port/out-port");
 }
