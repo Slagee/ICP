@@ -75,6 +75,7 @@ public:
     bool getInPort();
 
     wire *getWire();
+    void setWire(wire *value);
     abstractType *getDataType();
     QString createToolTip();
 

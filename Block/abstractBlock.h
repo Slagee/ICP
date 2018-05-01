@@ -77,6 +77,10 @@ public:
     QColor getNotCalculatedBorderColor();
     QColor getCalculatedBorderColor();
     QColor getLastCalculatedBorderColor();
+
+    // QGraphicsItem interface
+protected:
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // ABSTRACTBLOCK_H

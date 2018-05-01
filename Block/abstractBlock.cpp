@@ -109,3 +109,25 @@ QColor abstractBlock::getNotCalculatedBorderColor() { return this->NOT_CALCULATE
 QColor abstractBlock::getCalculatedBorderColor() { return this->CALCULATED_BLOCK_COLOR; }
 
 QColor abstractBlock::getLastCalculatedBorderColor() { return this->LAST_CALCULATED_BLOCK_COLOR; }
+
+void abstractBlock::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
+    QMessageBox::StandardButton deleteBlock;
+    deleteBlock = QMessageBox::question(nullptr, "Delete", "Do you really want to delete this block?", QMessageBox::Yes|QMessageBox::No);
+    if (deleteBlock == QMessageBox::Yes) {
+        for (int i = 0; i < this->getInPortsCount(); i++) {
+            if (this->getInPort(i)->getWire() != nullptr) {
+                this->getInPort(i)->getWire()->getOtherPort(this->getInPort(i))->setWire(nullptr);
+                delete this->getInPort(i)->getWire();
+                this->getInPort(i)->setWire(nullptr);
+            }
+        }
+        for (int i = 0; i < this->getOutPortsCount(); i++) {
+            if (this->getOutPort(i)->getWire() != nullptr) {
+                this->getOutPort(i)->getWire()->getOtherPort(this->getOutPort(i))->setWire(nullptr);
+                delete this->getOutPort(i)->getWire();
+                this->getOutPort(i)->setWire(nullptr);
+            }
+        }
+        delete this;
+    }
+}

@@ -41,6 +41,8 @@ bool port::getInPort() { return this->inPort; }
 
 wire *port::getWire() { return this->portWire; }
 
+void port::setWire(wire *value) { this->portWire = value; }
+
 abstractType *port::getDataType() { return this->dataType; }
 
 QString port::createToolTip() {
