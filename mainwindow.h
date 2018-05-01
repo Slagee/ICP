@@ -10,6 +10,7 @@
 
 #include "ui_mainwindow.h"
 #include "Block/abstractBlock.h"
+#include "Type/registrtypes.h"
 
 namespace Ui { class MainWindow; }
 class abstractBlock;

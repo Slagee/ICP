@@ -4,6 +4,7 @@
 #include "abstractType.h"
 
 class oneDecimalNumber : public abstractType {
+
 private:
     const QString TYPE_NAME = "One Decimal Number";
     const static int NUMBER_OF_VALUES = 1;
@@ -12,9 +13,7 @@ private:
     double values[NUMBER_OF_VALUES] = {0};
 
 public:
-    QGraphicsItem *myParent = nullptr;
-
-    oneDecimalNumber(QGraphicsItem *parent);
+    oneDecimalNumber();
 
     double getValue(int index);
     void setValue(int index, double newValue);

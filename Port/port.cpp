@@ -1,12 +1,19 @@
 #include "port.h"
 
-port::port(abstractBlock *parent){
+port::port(QString dataTypeName, abstractBlock *parent){
     this->myParent = parent;
-    this->dataType = new threeDecimalNumbers(this);
     this->setCursor(Qt::OpenHandCursor);
     this->setAcceptHoverEvents(true);
     this->setAcceptTouchEvents(true);
     this->setAcceptDrops(true);
+
+    int typeId = QMetaType::type(dataTypeName.toUtf8().constData());
+
+    if (typeId != QMetaType::UnknownType) {
+        void *myClassPtr = QMetaType::create(typeId);
+        this->dataType = static_cast<abstractType *>(myClassPtr);
+    }
+    this->dataType->setMyParent(this);
 }
 
 QRectF port::boundingRect() const { return QRectF(0, 0, 2 * this->PORT_RADIUS, 2 * this->PORT_RADIUS); }

@@ -11,7 +11,7 @@ void abstractBlock::constructBlock() {
 
     // cyklus pro vytvoreni in-portu
     for (int i = 1; i <= this->getInPortsCount(); i++) {
-        newPort = new port(this);
+        newPort = new port(this->getInPortDataType(i - 1), this);
         newPort->setX(this->startX - 2 * newPort->getPortRadius());
         newPort->setY(this->startY + i * portsDistance + this->TOP_BOTTOM_SPACING - newPort->getPortRadius());
         newPort->setInPort(true);
@@ -22,7 +22,7 @@ void abstractBlock::constructBlock() {
 
     // cyklus pro vytvoreni out-portu
     for (int i = 1; i <= this->getOutPortsCount(); i++) {
-        newPort = new port(this);
+        newPort = new port(this->getOutPortDataType(i - 1), this);
         newPort->setX(this->startX + this->getBlockWidth());
         newPort->setY(this->startY + i * portsDistance + this->TOP_BOTTOM_SPACING - newPort->getPortRadius());
         newPort->setInPort(false);

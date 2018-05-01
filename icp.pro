@@ -35,7 +35,12 @@ SOURCES += \
     Type/threedecimalnumbers.cpp\
     Port/port.cpp \
     Wire/wire.cpp \
-    values.cpp
+    values.cpp \
+    Type/registrtypes.cpp \
+    Block/multiplier.cpp \
+    Block/divider.cpp \
+    Block/adder1w1a2w2a3w3to1w1a2w1.cpp \
+    Block/adder1w1a2w1to1w1a2w2a3w3.cpp
 
 
 HEADERS += \
@@ -48,7 +53,12 @@ HEADERS += \
     Type/onedecimalnumber.h \
     Type/twodecimalnumbers.h \
     Type/threedecimalnumbers.h \
-    Wire/wire.h
+    Wire/wire.h \
+    Type/registrtypes.h \
+    Block/multiplier.h \
+    Block/divider.h \
+    Block/adder1w1a2w2a3w3to1w1a2w1.h \
+    Block/adder1w1a2w1to1w1a2w2a3w3.h
 
 FORMS += \
         mainwindow.ui \

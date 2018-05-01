@@ -16,6 +16,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QToolTip>
+#include <QMetaObject>
 
 #include "Type/abstractType.h"
 #include "Type/onedecimalnumber.h"
@@ -54,12 +55,11 @@ private:
     abstractType *dataType = nullptr;
 
 public:
-
     // ukazatel na otce
     abstractBlock *myParent = nullptr;
 
     // konstruktor
-    port(abstractBlock *parent = 0);
+    port(QString dataTypeName, abstractBlock *parent = 0);
 
     // pro prostor portu
     QRectF boundingRect() const;

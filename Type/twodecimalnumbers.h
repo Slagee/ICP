@@ -12,9 +12,7 @@ private:
     double values[NUMBER_OF_VALUES] = {0, 0};
 
 public:
-    QGraphicsItem *myParent = nullptr;
-
-    twoDecimalNumbers(QGraphicsItem *parent);
+    twoDecimalNumbers();
 
     double getValue(int index);
     void setValue(int index, double newValue);

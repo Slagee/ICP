@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->ui->setupUi(this);
     this->scene = new QGraphicsScene(this);
 
+    registrTypes();
+
+    //this->
+
     // promenned pro vyreseni spravne pozice sceny
     this->toolBarWidth = 94;
     this->menuHeight = 25;
