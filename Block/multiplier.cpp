@@ -18,6 +18,8 @@ int multiplier::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int multiplier::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
+int multiplier::getBlockType() const { return BLOCK_TYPE; }
+
 QString multiplier::getBlockName() const { return BLOCK_NAME; }
 
 QString multiplier::getInPortLabel(int index) const { return IN_PORTS_LABELS[index]; }

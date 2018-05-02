@@ -18,6 +18,8 @@ int adder::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int adder::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
+int adder::getBlockType() const { return BLOCK_TYPE; }
+
 QString adder::getBlockName() const { return BLOCK_NAME; }
 
 QString adder::getInPortLabel(int index) const { return IN_PORTS_LABELS[index]; }

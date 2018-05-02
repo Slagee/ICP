@@ -18,6 +18,8 @@ int divider::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int divider::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
+int divider::getBlockType() const { return BLOCK_TYPE; }
+
 QString divider::getBlockName() const { return BLOCK_NAME; }
 
 QString divider::getInPortLabel(int index) const { return IN_PORTS_LABELS[index]; }
