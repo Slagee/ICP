@@ -415,8 +415,8 @@ void MainWindow::on_action_Save_triggered() {
     for(int i = 0; i < this->countBlocks(); i++){
         QDomElement block = scheme.createElement("Block");
         block.setAttribute("Type", this->getBlock(i)->getBlockName());
-        block.setAttribute("X", this->getBlock(i)->startX);
-        block.setAttribute("Y", this->getBlock(i)->startY);
+        block.setAttribute("X", this->getBlock(i)->startX+this->getBlock(i)->x());
+        block.setAttribute("Y", this->getBlock(i)->startY+this->getBlock(i)->y());
         root.appendChild(block);
         for(int j = 0; j < this->getBlock(i)->getInPortsCount(); j++) {
             QDomElement portElement = scheme.createElement("Port");
@@ -438,10 +438,16 @@ void MainWindow::on_action_Save_triggered() {
         }
     }
 
-    QFile file("/home/lukas/test.xml");
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Neco spatne";
+    QString fileName = QFileDialog::getSaveFileName(this,"Save Scheme", "", "Scheme (*.xml)", 0, QFileDialog::DontUseNativeDialog);
+    if (fileName.isEmpty()) {
+        qDebug() << "IM HERE";
+        return;
     } else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::information(this, tr("Unable to open file"), file.errorString());
+            return;
+        }
         QTextStream stream(&file);
         stream << scheme.toString();
         file.close();

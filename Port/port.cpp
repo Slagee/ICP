@@ -14,6 +14,9 @@ port::port(QString dataTypeName, abstractBlock *parent){
         this->dataType = static_cast<abstractType *>(myClassPtr);
     }
     this->dataType->setMyParent(this);
+    static int idCounter = 0;
+    this->id = idCounter;
+    idCounter++;
 }
 
 QRectF port::boundingRect() const { return QRectF(0, 0, 2 * this->PORT_RADIUS, 2 * this->PORT_RADIUS); }
@@ -40,7 +43,7 @@ void port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawEllipse(portBox);
 }
 
-int port::getPortID() {return this->x()*this->y()*this->myParent->startX*this->myParent->startY; }
+int port::getPortID() {return this->id;}
 
 int port::getPortRadius() { return this->PORT_RADIUS; }
 

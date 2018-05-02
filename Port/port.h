@@ -51,6 +51,9 @@ private:
     // ukazatel na drat
     wire *portWire = nullptr;
 
+    // port id
+    int id;
+
     // ukazatel na typ s daty
     abstractType *dataType = nullptr;
 

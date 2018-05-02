@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QtGui>
+#include <QFileDialog>
 #include <QtXml/QDomElement>
 #include <QtXml/QDomDocument>
 #include <QMessageBox>
