@@ -83,6 +83,7 @@ public:
     void setWire(wire *value);
     abstractType *getDataType();
     QString createToolTip();
+    void setPortID(int tmp);
 
 protected:
 
