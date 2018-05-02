@@ -518,9 +518,6 @@ void MainWindow::on_action_Open_triggered() {
                     this->getBlock(m)->getOutPort(n)->portWire = new wire(this->scene);
                     this->getBlock(m)->getOutPort(n)->portWire->setEndPort(this->getBlock(m)->getOutPort(n));
                     this->getBlock(m)->scene()->addItem(this->getBlock(m)->getOutPort(n)->portWire);
-                    this->getBlock(m)->getOutPort(n)->getWire()->shiftEndX;
-                    this->getBlock(m)->getOutPort(n)->getWire()->shiftEndY;
-                    this->getBlock(m)->getOutPort(n)->getWire()->update();
                     qDebug() << "Did it";
                 }
             }
@@ -530,9 +527,6 @@ void MainWindow::on_action_Open_triggered() {
                     qDebug() << "Found it too";
                     this->getBlock(m)->getInPort(o)->portWire->setStartPort(this->getBlock(m)->getInPort(o));
                     qDebug() << "Did it too";
-                    this->getBlock(m)->getInPort(o)->getWire()->shiftStartX;
-                    this->getBlock(m)->getInPort(o)->getWire()->shiftStartY;
-                    this->getBlock(m)->getInPort(o)->getWire()->update();
                     this->getBlock(m)->getInPort(o)->portWire->setDragFinished(true);
                 }
             }

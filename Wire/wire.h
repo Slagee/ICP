@@ -14,16 +14,14 @@ class wire : public QGraphicsLineItem  {
 private:
     const int WIRE_THICKNESS = 3;
 
-
-
-    // detekce zdali je port z porto do portu nebo se teprve tahne mysi
-    bool dragFinished = false;
-
     // promenne pro posun zacatku/konce dratu pri pohybu bloku s in-portem/out-portem
     int shiftStartX;
     int shiftStartY;
     int shiftEndX;
     int shiftEndY;
+
+    // detekce zdali je port z porto do portu nebo se teprve tahne mysi
+    bool dragFinished = false;
 
 public:
     // ukazatele na in-port/out-port
