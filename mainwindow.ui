@@ -26,6 +26,12 @@
       <height>531</height>
      </rect>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -56,26 +62,13 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionnapoveda"/>
+    <addaction name="actionHelp"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Calculate"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>LeftToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionadder"/>
-   <addaction name="actionsubtractor"/>
-  </widget>
   <action name="action_Open">
    <property name="text">
     <string>&amp;Open</string>
@@ -86,24 +79,14 @@
     <string>&amp;Save</string>
    </property>
   </action>
-  <action name="actionadder">
-   <property name="text">
-    <string>adder</string>
-   </property>
-  </action>
-  <action name="actionsubtractor">
-   <property name="text">
-    <string>subtractor</string>
-   </property>
-  </action>
   <action name="actionCalculate">
    <property name="text">
     <string>&amp;Calculate</string>
    </property>
   </action>
-  <action name="actionStep_Calculation">
+  <action name="actionHelp">
    <property name="text">
-    <string>&amp;Step Calculation</string>
+    <string>&amp;Help</string>
    </property>
   </action>
   <action name="actionNew">
@@ -111,9 +94,9 @@
     <string>&amp;New</string>
    </property>
   </action>
-  <action name="actionnapoveda">
+  <action name="actionStep_Calculation">
    <property name="text">
-    <string>&amp;Help</string>
+    <string>&amp;Step Calculation</string>
    </property>
   </action>
  </widget>

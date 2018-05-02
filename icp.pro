@@ -29,6 +29,10 @@ SOURCES += \
     Block/abstractBlock.cpp \
     Block/adder.cpp \
     Block/subtractor.cpp \
+    Block/multiplier.cpp \
+    Block/divider.cpp \
+    Block/adder1w1a2w2a3w3to1w1a2w1.cpp \
+    Block/adder1w1a2w1to1w1a2w2a3w3.cpp \
     Type/abstractType.cpp \
     Type/onedecimalnumber.cpp \
     Type/twodecimalnumbers.cpp \
@@ -37,10 +41,7 @@ SOURCES += \
     Wire/wire.cpp \
     values.cpp \
     Type/registrtypes.cpp \
-    Block/multiplier.cpp \
-    Block/divider.cpp \
-    Block/adder1w1a2w2a3w3to1w1a2w1.cpp \
-    Block/adder1w1a2w1to1w1a2w2a3w3.cpp
+    Block/blocksfactory.cpp
 
 
 HEADERS += \
@@ -49,16 +50,17 @@ HEADERS += \
     Block/abstractBlock.h \
     Block/adder.h \
     Block/subtractor.h \
+    Block/multiplier.h \
+    Block/divider.h \
+    Block/adder1w1a2w2a3w3to1w1a2w1.h \
+    Block/adder1w1a2w1to1w1a2w2a3w3.h \
     Type/abstractType.h \
     Type/onedecimalnumber.h \
     Type/twodecimalnumbers.h \
     Type/threedecimalnumbers.h \
     Wire/wire.h \
     Type/registrtypes.h \
-    Block/multiplier.h \
-    Block/divider.h \
-    Block/adder1w1a2w2a3w3to1w1a2w1.h \
-    Block/adder1w1a2w1to1w1a2w2a3w3.h
+    Block/blocksfactory.h
 
 FORMS += \
         mainwindow.ui \
@@ -69,3 +71,6 @@ QMAKE_CXXFLAGS += -std=gnu++14
 QMAKE_CXXFLAGS += -std=gnu++14
 
 DISTFILES +=
+
+RESOURCES += \
+    resources.qrc

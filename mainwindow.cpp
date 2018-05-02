@@ -1,64 +1,85 @@
 #include "mainwindow.h"
-#include "Block/adder.h"
-#include "Block/subtractor.h"
-
+#include "Block/blocksfactory.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     this->ui->setupUi(this);
     this->scene = new QGraphicsScene(this);
 
     registrTypes();
-
-    //this->
-
-    // promenned pro vyreseni spravne pozice sceny
-    this->toolBarWidth = 94;
-    this->menuHeight = 25;
-    this->magicConstant1 = 11;
-    this->magicConstant2 = 30;
+    createToolbarForBlocks();
 
     // nastaveni velikosti a umisteni sceny
-    this->scene->setSceneRect(0, 0, this->width() - this->toolBarWidth - this->magicConstant1, this->height() - this->menuHeight - this->magicConstant2);
+    this->scene->setSceneRect(0, 0, this->width() - this->TOOLBAR_WIDTH - 2 * this->TOOLBAR_MARGIN, this->height() - this->MENU_HEIGHT - this->TOP_MARGIN);
     this->scene->setBackgroundBrush(QBrush(QColor(210,210,210), Qt::SolidPattern));
     this->ui->graphicsView->setScene(this->scene);
+
     setCentralWidget( this->ui->graphicsView );
 
     this->stepCalculations = this->createToolbarForStelCalculations();
     this->stepCalculations->hide();
 
-    this->lastTool = 0;
+
+    //qDebug() << " toolbarspacing " << this->toolsForBlocks->styleSheet();
+
+    /*
+    qDebug() << "veci tu je " << this->scene->items().length();
+    for (int i = 0; i < this->scene->items().length(); i++) {
+        qDebug() << i+1 << " je " << this->scene->items().at(i);
+    }
+    */
+
+
 }
 
 MainWindow::~MainWindow() {
     delete this->ui;
 }
 
-// kliknuti na tool1 prida adder doprostred canvasu
-void MainWindow::on_actionadder_triggered() {
-    this->scene->addItem(new adder(this->width() / 2, this->height() / 2, this->scene));
+void MainWindow::createToolbarForBlocks() {
+    this->toolsForBlocks = new QToolBar();
+
+    for (int i = 0; i < NUMBER_OF_BLOCKS; i++) {
+        //QAction *toolBlock = new QAction(tr(BLOCKS_CLASSES[i].toUtf8().constData()), this);
+        QAction *toolBlock = new QAction(this);
+        toolBlock->setIcon(QIcon(":/Resources/Resources/" + BLOCKS_CLASSES[i] + ".png"));
+        connect(toolBlock, &QAction::hovered, this, [this, i]{ setTool(i); });
+        connect(toolBlock, &QAction::triggered, this, [this, i]{ createBlock(i); });
+        this->toolsForBlocks->addAction(toolBlock);
+    }
+
+    this->addToolBar(Qt::LeftToolBarArea, toolsForBlocks);
+    this->toolsForBlocks->setOrientation(Qt::Vertical);
+    this->toolsForBlocks->setMovable(false);
+    this->toolsForBlocks->setIconSize(QSize(this->TOOLBAR_WIDTH,this->TOOLBAR_HEIGHT));
+}
+/*
+std::string MainWindo::getTooltipForTool(int i) {
+   std::string tooltip = "";
+
+}
+*/
+int MainWindow::getToolbarWidth() { return this->TOOLBAR_WIDTH; }
+
+int MainWindow::getMenuHeight() { return this->MENU_HEIGHT; }
+
+int MainWindow::getToolbarMargin() { return this->TOOLBAR_MARGIN; }
+
+void MainWindow::setTool(int index) {
+    //this->toolsActive = true;
+    this->tool = index;
 }
 
-// kliknuti na tool2 prida subtractor doprostred canvasu
-void MainWindow::on_actionsubtractor_triggered() {
-    this->scene->addItem(new subtractor(this->width() / 2, this->height() / 2, this->scene));
+void MainWindow::createBlock(int index) {
+    blocksfactory(index, this->scene->width() / 2, this->scene->height() / 2, this->scene);
 }
 
 // po realesu mysi prida blok...
 void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
-    switch (this->lastTool) {
-    case(1):
-        this->scene->addItem(new adder(event->localPos().x() - this->toolBarWidth, event->localPos().y() - this->menuHeight, this->scene));
-        break;
-    case(2):
-        this->scene->addItem(new subtractor(event->localPos().x() - this->toolBarWidth, event->localPos().y() - this->menuHeight, this->scene));
-        break;
+    if (this->tool != this->TOOLS_NOT_ACTIVE) {
+        blocksfactory(this->tool, event->localPos().x() - this->TOOLBAR_WIDTH - 2 * this->TOOLBAR_MARGIN, event->localPos().y() - this->MENU_HEIGHT, this->scene);
+        this->tool = this->TOOLS_NOT_ACTIVE;
     }
 }
-
-// trosku hack - nastavi block, ktery se na pridat po drag and dropu...
-void MainWindow::on_actionadder_hovered() { this->lastTool = 1; }
-
-void MainWindow::on_actionsubtractor_hovered() { this->lastTool = 2; }
 
 // spocita bloky a vrati jejich pocet
 int MainWindow::countBlocks() {
@@ -239,6 +260,7 @@ void MainWindow::on_actionStep_Calculation_triggered() {
             this->setNextBlockForStepCalculations();
             if (!this->checkEndOfStepCalculations()) {
                 this->stepCalculations->show();
+                this->disableForStepCalculations();
             } else {
                 QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
             }
@@ -246,6 +268,29 @@ void MainWindow::on_actionStep_Calculation_triggered() {
             QMessageBox::warning(this, "Unfilled IN-ports detected!", "You have to fill values for all wireless IN-ports!");
         }
     }
+}
+
+void MainWindow::disableForStepCalculations() {
+    for (int i = 0; i < NUMBER_OF_BLOCKS; i++) {
+        this->toolsForBlocks->actions().at(i)->setDisabled(true);
+        this->menuBar()->actions().at(0)->setDisabled(true);
+        this->menuBar()->actions().at(1)->setDisabled(true);
+    }
+}
+
+void MainWindow::enableAfterForStepCalculations() {
+    for (int i = 0; i < NUMBER_OF_BLOCKS; i++) {
+        this->toolsForBlocks->actions().at(i)->setEnabled(true);
+        this->menuBar()->actions().at(0)->setEnabled(true);
+        this->menuBar()->actions().at(1)->setEnabled(true);
+    }
+}
+
+bool MainWindow::getWireEnabled() {
+    if (this->toolsForBlocks->actions().at(0)->isEnabled()) {
+        return true;
+    }
+    return false;
 }
 
 QToolBar *MainWindow::createToolbarForStelCalculations() {
@@ -280,6 +325,7 @@ void MainWindow::nextStep() {
     if (this->checkEndOfStepCalculations()) {
         this->setBlocksForStepCalculations(nextBlock->getDefaultBorderColor());
         this->stepCalculations->hide();
+        this->enableAfterForStepCalculations();
         QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
     }
 }
@@ -288,12 +334,14 @@ void MainWindow::finishCalculations() {
     this->calculate();
     this->setBlocksForStepCalculations(this->getBlock(0)->getDefaultBorderColor());
     this->stepCalculations->hide();
+    this->enableAfterForStepCalculations();
     QMessageBox::information(this, "Calculations done", "Calculations successfully completed.");
 }
 
 void MainWindow::endCalculations() {
     this->setBlocksForStepCalculations(this->getBlock(0)->getDefaultBorderColor());
     this->stepCalculations->hide();
+    this->enableAfterForStepCalculations();
 }
 
 void MainWindow::setBlocksForStepCalculations(QColor color) {
@@ -346,6 +394,11 @@ bool MainWindow::checkEndOfStepCalculations() {
     return true;
 }
 
-void MainWindow::on_actionnapoveda_triggered() {
+void MainWindow::on_actionHelp_triggered() {
     QMessageBox::information(this, "Help", "The application is used for creating/editing block schemas.\n\nYou can add new block by dragging from toolbar.\n\nYou can fill in-port values by rightclick on single port\nor you can fill all blocks in-ports by righclick on whole block.\n\nYou can delete block by rightclick on block.\n\nYou can calculate your scheme through run menu.\n\nYou can save or import your schema through file menu.\n\nPort colors indicates port status and functionality:\nred is for wireless in-port with not filled values\nblue is for wireless out-port\nblack is for wired in-port/out-port\ngreen is for wireless in-port witch filled values\nyellow is for focused in-port/out-port");
 }
+/*
+void MainWindow::on_actionnapoveda_triggered() {
+    qDebug("boom");
+}
+*/

@@ -19,9 +19,9 @@
 #include <QMetaObject>
 
 #include "Type/abstractType.h"
-#include "Type/onedecimalnumber.h"
-#include "Type/twodecimalnumbers.h"
-#include "Type/threedecimalnumbers.h"
+//#include "Type/onedecimalnumber.h"
+//#include "Type/twodecimalnumbers.h"
+//#include "Type/threedecimalnumbers.h"
 #include "Wire/wire.h"
 #include "ui_values.h"
 

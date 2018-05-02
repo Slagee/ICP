@@ -22,6 +22,9 @@ private:
 public:
     // metody pro praci s blokem - konstruktor + metody pro ziskani informaci o bloku
     adder(int x, int y, QGraphicsScene *parent = 0);
+    //adder(int x = 0, int y = 0, QGraphicsScene *parent = 0);
+    //adder();
+    //~adder();
     int getBlockWidth() const;
     int getBlockHeight() const;
     int getInPortsCount() const;

@@ -30,11 +30,11 @@ void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
         // kdyz se drat tahne z in-portu
         if (this->startPort != nullptr) {
-            painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), mouse.x() - window->toolBarWidth, mouse.y() - window->menuHeight);
+            painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), mouse.x() - window->getToolbarWidth() - 2 * window->getToolbarMargin(), mouse.y() - window->getMenuHeight());
 
         // kdyz se drat tahne z out-portu
         } else if (this->endPort != nullptr) {
-            painter->drawLine(mouse.x() - window->toolBarWidth, mouse.y() - window->menuHeight, this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
+            painter->drawLine(mouse.x() - window->getToolbarWidth() - 2 * window->getToolbarMargin(), mouse.y() - window->getMenuHeight(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
         }
     }
 }

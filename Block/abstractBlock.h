@@ -8,11 +8,11 @@
 #include <QString>
 #include <QTextOption>
 
-#include "../Port/port.h"
+#include "Port/port.h"
 
 class wire;
 class port;
-class abstractBlock;
+//class abstractBlock;
 
 // abstraktni trida pro bloky
 class abstractBlock : public QGraphicsItemGroup {
