@@ -83,9 +83,13 @@ void port::hoverLeaveEvent(QGraphicsSceneHoverEvent *event) {
 void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     if(event->button()==Qt::RightButton){
         if(this->portWire != nullptr){
+
+            QMessageBox::warning(0,"Error","Port is already connected!");
+            /*
             QMessageBox errorBox;
             errorBox.warning(0,"Error","Port is already connected!");
             errorBox.setFixedSize(500,250);
+            */
         } else {
             Values values(this);
             values.setModal(true);

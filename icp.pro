@@ -41,7 +41,8 @@ SOURCES += \
     Wire/wire.cpp \
     values.cpp \
     Type/registrtypes.cpp \
-    Block/blocksfactory.cpp
+    Block/blocksfactory.cpp \
+    Block/fillvaluesblock.cpp
 
 
 HEADERS += \
@@ -60,7 +61,8 @@ HEADERS += \
     Type/threedecimalnumbers.h \
     Wire/wire.h \
     Type/registrtypes.h \
-    Block/blocksfactory.h
+    Block/blocksfactory.h \
+    Block/fillvaluesblock.h
 
 FORMS += \
         mainwindow.ui \

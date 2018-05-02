@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->stepCalculations = this->createToolbarForStelCalculations();
     this->stepCalculations->hide();
 
+    this->menuBar()->setContextMenuPolicy(Qt::PreventContextMenu);
 
     //qDebug() << " toolbarspacing " << this->toolsForBlocks->styleSheet();
 
@@ -51,6 +52,7 @@ void MainWindow::createToolbarForBlocks() {
     this->toolsForBlocks->setOrientation(Qt::Vertical);
     this->toolsForBlocks->setMovable(false);
     this->toolsForBlocks->setIconSize(QSize(this->TOOLBAR_WIDTH,this->TOOLBAR_HEIGHT));
+    this->toolsForBlocks->setContextMenuPolicy(Qt::PreventContextMenu);
 }
 /*
 std::string MainWindo::getTooltipForTool(int i) {
@@ -308,6 +310,7 @@ QToolBar *MainWindow::createToolbarForStelCalculations() {
     connect(endCalculations, &QAction::triggered, this, &MainWindow::endCalculations);
     stepCalculations->addAction(endCalculations);
 
+    stepCalculations->setContextMenuPolicy(Qt::PreventContextMenu);
     this->addToolBar(stepCalculations);
     return stepCalculations;
 }

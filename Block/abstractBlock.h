@@ -9,6 +9,7 @@
 #include <QTextOption>
 
 #include "Port/port.h"
+#include "fillvaluesblock.h"
 
 class wire;
 class port;
@@ -81,6 +82,10 @@ public:
     // QGraphicsItem interface
 protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+
+    // QGraphicsItem interface
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // ABSTRACTBLOCK_H

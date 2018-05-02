@@ -131,3 +131,12 @@ void abstractBlock::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
         delete this;
     }
 }
+
+void abstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(event->button()==Qt::RightButton){
+            fillValuesVlock values(this);
+            values.setModal(true);
+            values.exec();
+    }
+}
