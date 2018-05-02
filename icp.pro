@@ -70,8 +70,6 @@ FORMS += \
 
 QMAKE_CXXFLAGS += -std=gnu++14
 
-QMAKE_CXXFLAGS += -std=gnu++14
-
 DISTFILES +=
 
 RESOURCES += \

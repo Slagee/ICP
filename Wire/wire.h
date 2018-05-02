@@ -59,7 +59,7 @@ public:
     void setShiftEndY(int value);
 
 protected:
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
 
 };
 #endif // WIRE_H

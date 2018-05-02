@@ -4,12 +4,27 @@
 wire::wire(QGraphicsScene *parent) {
     this->myParent = parent;
     this->setAcceptHoverEvents(true);
-    this->setToolTip("test");
+
+
+    //this->setAcceptDrops(true);
+    //this->setAcceptTouchEvents(this);
+    //this->setActive(true);
+
+    //this->setFlags(ItemIsMovable);
+    //this->setHandlesChildEvents(false);
 }
 
 QRectF wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(), this->myParent->height()); }
+//QRectF wire::boundingRect() const { return QRectF(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(),100, 100); }
 
 void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+
+
+    painter->setClipRect( option->exposedRect );
+
+    static int counter = 0;
+    qDebug() << "rect wiru je " << this->boundingRect() << " " << counter;
+    counter++;
 
     QPen pen;
     pen.setWidth(WIRE_THICKNESS);
@@ -18,7 +33,8 @@ void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     // kdyz je drat z portu do portu
     if (this->startPort != nullptr && this->endPort != nullptr) {
-        painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
+        this->setLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
+        painter->drawLine(this->line());
 
     // kdyz je z portu k mysi
     } else if (!this->dragFinished) {
@@ -30,11 +46,13 @@ void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
         // kdyz se drat tahne z in-portu
         if (this->startPort != nullptr) {
-            painter->drawLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), mouse.x() - window->getToolbarWidth() - 2 * window->getToolbarMargin(), mouse.y() - window->getMenuHeight());
+            this->setLine(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(), mouse.x() - window->getToolbarWidth() - 2 * window->getToolbarMargin(), mouse.y() - window->getMenuHeight());
+            painter->drawLine(this->line());
 
         // kdyz se drat tahne z out-portu
         } else if (this->endPort != nullptr) {
-            painter->drawLine(mouse.x() - window->getToolbarWidth() - 2 * window->getToolbarMargin(), mouse.y() - window->getMenuHeight(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
+            this->setLine(mouse.x() - window->getToolbarWidth() - 2 * window->getToolbarMargin(), mouse.y() - window->getMenuHeight(), this->endPort->x() + this->shiftEndX + this->endPort->getPortRadius(), this->endPort->y() + this->shiftEndY + this->endPort->getPortRadius());
+            painter->drawLine(this->line());
         }
     }
 }

@@ -32,6 +32,8 @@ void abstractBlock::constructBlock() {
 }
 
 void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
+    Q_UNUSED(options);
+    Q_UNUSED(widget);
     // pro telo bloku
     QRectF blockBox = boundingRect();
 
@@ -135,6 +137,7 @@ void abstractBlock::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
         }
         delete this;
     }
+    Q_UNUSED(event);
 }
 
 void abstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -144,4 +147,5 @@ void abstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event)
             values.setModal(true);
             values.exec();
     }
+    Q_UNUSED(event);
 }

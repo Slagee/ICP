@@ -19,17 +19,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->stepCalculations->hide();
 
     this->menuBar()->setContextMenuPolicy(Qt::PreventContextMenu);
-
-    //qDebug() << " toolbarspacing " << this->toolsForBlocks->styleSheet();
-
-    /*
-    qDebug() << "veci tu je " << this->scene->items().length();
-    for (int i = 0; i < this->scene->items().length(); i++) {
-        qDebug() << i+1 << " je " << this->scene->items().at(i);
-    }
-    */
-
-
 }
 
 MainWindow::~MainWindow() {

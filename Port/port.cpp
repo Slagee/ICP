@@ -8,7 +8,6 @@ port::port(QString dataTypeName, abstractBlock *parent){
     this->setAcceptDrops(true);
 
     int typeId = QMetaType::type(dataTypeName.toUtf8().constData());
-
     if (typeId != QMetaType::UnknownType) {
         void *myClassPtr = QMetaType::create(typeId);
         this->dataType = static_cast<abstractType *>(myClassPtr);
@@ -21,6 +20,8 @@ QRectF port::boundingRect() const { return QRectF(0, 0, 2 * this->PORT_RADIUS, 2
 void port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     // prostor pro port
     QRectF portBox = boundingRect();
+
+    qDebug() << "maluju port";
 
     // pro nastaveni barvy portu
     QBrush brush(this->WIRELESS_UNSET_IN_PORT_COLOR);
@@ -109,7 +110,7 @@ void port::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void port::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
-
+    qDebug() << "mousemove port";
     if ((qobject_cast<MainWindow *>(this->myParent->myParent->parent()))->getWireEnabled()) {
 
 
