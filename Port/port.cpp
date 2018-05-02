@@ -1,12 +1,19 @@
 #include "port.h"
 
-port::port(abstractBlock *parent){
+port::port(QString dataTypeName, abstractBlock *parent){
     this->myParent = parent;
-    this->dataType = new threeDecimalNumbers(this);
     this->setCursor(Qt::OpenHandCursor);
     this->setAcceptHoverEvents(true);
     this->setAcceptTouchEvents(true);
     this->setAcceptDrops(true);
+
+    int typeId = QMetaType::type(dataTypeName.toUtf8().constData());
+
+    if (typeId != QMetaType::UnknownType) {
+        void *myClassPtr = QMetaType::create(typeId);
+        this->dataType = static_cast<abstractType *>(myClassPtr);
+    }
+    this->dataType->setMyParent(this);
 }
 
 QRectF port::boundingRect() const { return QRectF(0, 0, 2 * this->PORT_RADIUS, 2 * this->PORT_RADIUS); }
@@ -76,9 +83,13 @@ void port::hoverLeaveEvent(QGraphicsSceneHoverEvent *event) {
 void port::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     if(event->button()==Qt::RightButton){
         if(this->portWire != nullptr){
+
+            QMessageBox::warning(0,"Error","Port is already connected!");
+            /*
             QMessageBox errorBox;
             errorBox.warning(0,"Error","Port is already connected!");
             errorBox.setFixedSize(500,250);
+            */
         } else {
             Values values(this);
             values.setModal(true);
@@ -98,6 +109,9 @@ void port::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void port::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
+
+    if ((qobject_cast<MainWindow *>(this->myParent->myParent->parent()))->getWireEnabled()) {
+
 
     // pro zabraneni nechtenych dragu pri kliknuti
     if (QLineF(event->screenPos(), event->buttonDownScreenPos(Qt::LeftButton)).length() < QApplication::startDragDistance()) { return; }
@@ -145,6 +159,7 @@ void port::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
             delete this->myParent->myParent->items().first();
         }
     }
+    }
 }
 
 void port::dragEnterEvent(QGraphicsSceneDragDropEvent *event) {
@@ -179,7 +194,7 @@ void port::dropEvent(QGraphicsSceneDragDropEvent *event) {
         delete this->myParent->myParent->items().first();
 
     // jinak portu nastavime tento drat a zkontrolujeme jestli neporusuje nejaka pravidla
-    } else {
+    } else {        
 
         // nastaveni dratu portu
         this->portWire = qgraphicsitem_cast<wire *>(this->myParent->myParent->items().first());
@@ -187,53 +202,67 @@ void port::dropEvent(QGraphicsSceneDragDropEvent *event) {
         // kdyz se drat dotahl na in-port
         if (this->inPort) {
 
-            // kdyz je startPort dratu uz zabrany, tak drat znicime
-            if (this->portWire->getStartPort() != nullptr) {
-                this->portWire->getStartPort()->portWire = nullptr;
-                delete this->myParent->myParent->items().first();
+            if (this->dataType->getType() != this->portWire->getEndPort()->getDataType()->getType()) {
+                this->portWire->getEndPort()->portWire = nullptr;
+                delete myParent->myParent->items().first();
                 this->portWire = nullptr;
-
-            // jinak...
             } else {
-
-                // kdyz endPort dratu patri stejnemu bloku, tak drat znicime
-                if (this->portWire->getEndPort()->myParent == this->myParent) {
-                    this->portWire->getEndPort()->portWire = nullptr;
-                    delete myParent->myParent->items().first();
+                // kdyz je startPort dratu uz zabrany, tak drat znicime
+                if (this->portWire->getStartPort() != nullptr) {
+                    this->portWire->getStartPort()->portWire = nullptr;
+                    delete this->myParent->myParent->items().first();
                     this->portWire = nullptr;
 
-                // jinak dratu nastavime tento port jako startPort
+                // jinak...
                 } else {
-                    this->portWire->setStartPort(this);
-                    this->portWire->setDragFinished(true);
-                    this->portWire->update();
+
+                    // kdyz endPort dratu patri stejnemu bloku, tak drat znicime
+                    if (this->portWire->getEndPort()->myParent == this->myParent) {
+                        this->portWire->getEndPort()->portWire = nullptr;
+                        delete myParent->myParent->items().first();
+                        this->portWire = nullptr;
+
+                    // jinak dratu nastavime tento port jako startPort
+                    } else {
+                        this->portWire->setStartPort(this);
+                        this->portWire->setDragFinished(true);
+                        this->portWire->update();
+                    }
                 }
             }
 
         // kdyz se dotahl na out-port
         } else {
 
-            // kdyz je endPort dratu uz zabrany, tak drat znicime
-            if (this->portWire->getEndPort() != nullptr) {
-                this->portWire->getEndPort()->portWire = nullptr;
-                delete myParent->myParent->items().first();
+            if (this->dataType->getType() != this->portWire->getStartPort()->getDataType()->getType()) {
+                this->portWire->getStartPort()->portWire = nullptr;
+                delete this->myParent->myParent->items().first();
                 this->portWire = nullptr;
-
-            // jinak...
             } else {
 
-                // kdyz startPort dratu patri stejnemu bloku, tak drat znicime
-                if (this->portWire->getStartPort()->myParent == this->myParent) {
-                    this->portWire->getStartPort()->portWire = nullptr;
-                    delete this->myParent->myParent->items().first();
+                // kdyz je endPort dratu uz zabrany, tak drat znicime
+                if (this->portWire->getEndPort() != nullptr) {
+                    this->portWire->getEndPort()->portWire = nullptr;
+                    delete myParent->myParent->items().first();
                     this->portWire = nullptr;
 
-                // jinak dratu nastavime tento port jako endPort
+                // jinak...
                 } else {
-                    this->portWire->setEndPort(this);
-                    this->portWire->setDragFinished(true);
-                    this->portWire->update();
+
+                    // kdyz startPort dratu patri stejnemu bloku, tak drat znicime
+                    if (this->portWire->getStartPort()->myParent == this->myParent) {
+                        this->portWire->getStartPort()->portWire = nullptr;
+                        delete this->myParent->myParent->items().first();
+                        this->portWire = nullptr;
+
+                    // jinak dratu nastavime tento port jako endPort
+                    } else {
+                        this->portWire->setEndPort(this);
+                        this->portWire->setDragFinished(true);
+                        this->portWire->update();
+                    }
                 }
+
             }
         }
     }

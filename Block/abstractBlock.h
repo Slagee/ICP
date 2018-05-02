@@ -8,11 +8,12 @@
 #include <QString>
 #include <QTextOption>
 
-#include "../Port/port.h"
+#include "Port/port.h"
+#include "fillvaluesblock.h"
 
 class wire;
 class port;
-class abstractBlock;
+//class abstractBlock;
 
 // abstraktni trida pro bloky
 class abstractBlock : public QGraphicsItemGroup {
@@ -42,8 +43,6 @@ public:
     int startX = 0;
     int startY = 0;
 
-
-
     // ukazatel na otce
     QGraphicsScene *myParent = nullptr;
 
@@ -64,6 +63,8 @@ public:
     virtual QString getBlockName() const = 0;
     virtual QString getInPortLabel(int index) const = 0;
     virtual QString getOutPortLabel(int index) const = 0;
+    virtual QString getInPortDataType(int index) const = 0;
+    virtual QString getOutPortDataType(int index) const = 0;
     virtual void doCalculation() = 0;
 
     port *getOutPort(int index);
@@ -81,6 +82,10 @@ public:
     // QGraphicsItem interface
 protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+
+    // QGraphicsItem interface
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // ABSTRACTBLOCK_H

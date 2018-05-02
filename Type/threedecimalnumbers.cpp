@@ -1,8 +1,6 @@
 #include "threedecimalnumbers.h"
 
-threeDecimalNumbers::threeDecimalNumbers(QGraphicsItem *parent) {
-    this->myParent = parent;
-}
+threeDecimalNumbers::threeDecimalNumbers() {}
 
 double threeDecimalNumbers::getValue(int index) { return this->values[index]; }
 

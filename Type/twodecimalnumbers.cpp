@@ -1,8 +1,6 @@
 #include "twodecimalnumbers.h"
 
-twoDecimalNumbers::twoDecimalNumbers(QGraphicsItem *parent) {
-    this->myParent = parent;
-}
+twoDecimalNumbers::twoDecimalNumbers() {}
 
 double twoDecimalNumbers::getValue(int index) { return this->values[index]; }
 

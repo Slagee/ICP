@@ -6,15 +6,13 @@
 class twoDecimalNumbers : public abstractType {
 private:
     const QString TYPE_NAME = "Two Decimal Number";
-    const static int NUMBER_OF_VALUES = 3;
+    const static int NUMBER_OF_VALUES = 2;
     const QString VALUES_NAMES[NUMBER_OF_VALUES] = {"Decimal number", "Decimal number"};
 
     double values[NUMBER_OF_VALUES] = {0, 0};
 
 public:
-    QGraphicsItem *myParent = nullptr;
-
-    twoDecimalNumbers(QGraphicsItem *parent);
+    twoDecimalNumbers();
 
     double getValue(int index);
     void setValue(int index, double newValue);

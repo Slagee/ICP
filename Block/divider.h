@@ -1,12 +1,12 @@
-#ifndef ADDER_H
-#define ADDER_H
+#ifndef DIVIDER_H
+#define DIVIDER_H
 
 #include "abstractBlock.h"
 
 class abstractBlock;
 
-// trida bloku adder
-class adder : public abstractBlock {
+// trida bloku divider
+class divider : public abstractBlock {
 private:
     // konstanty pro velikost bloku, pocet in-portu/out-portu, jejich popisy a nazev bloku
     const int BLOCK_WIDTH = 120;
@@ -17,14 +17,11 @@ private:
     const static int OUT_PORTS_COUNT = 1;
     const QString OUT_PORTS_LABELS[OUT_PORTS_COUNT] = {"1.1"};
     const QString OUT_PORTS_DATA_TYPES[OUT_PORTS_COUNT] = {"One Decimal Number"};
-    const QString BLOCK_NAME = "ADD";
+    const QString BLOCK_NAME = "DIV";
 
 public:
     // metody pro praci s blokem - konstruktor + metody pro ziskani informaci o bloku
-    adder(int x, int y, QGraphicsScene *parent = 0);
-    //adder(int x = 0, int y = 0, QGraphicsScene *parent = 0);
-    //adder();
-    //~adder();
+    divider(int x, int y, QGraphicsScene *parent = 0);
     int getBlockWidth() const;
     int getBlockHeight() const;
     int getInPortsCount() const;
@@ -37,4 +34,4 @@ public:
     void doCalculation();
 };
 
-#endif // ADDER_H
+#endif // DIVIDER_H

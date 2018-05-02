@@ -1,8 +1,6 @@
 #include "onedecimalnumber.h"
 
-oneDecimalNumber::oneDecimalNumber(QGraphicsItem *parent) {
-    this->myParent = parent;
-}
+oneDecimalNumber::oneDecimalNumber() {}
 
 double oneDecimalNumber::getValue(int index) { return this->values[index]; }
 

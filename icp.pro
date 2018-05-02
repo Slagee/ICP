@@ -29,13 +29,20 @@ SOURCES += \
     Block/abstractBlock.cpp \
     Block/adder.cpp \
     Block/subtractor.cpp \
+    Block/multiplier.cpp \
+    Block/divider.cpp \
+    Block/adder1w1a2w2a3w3to1w1a2w1.cpp \
+    Block/adder1w1a2w1to1w1a2w2a3w3.cpp \
     Type/abstractType.cpp \
     Type/onedecimalnumber.cpp \
     Type/twodecimalnumbers.cpp \
     Type/threedecimalnumbers.cpp\
     Port/port.cpp \
     Wire/wire.cpp \
-    values.cpp
+    values.cpp \
+    Type/registrtypes.cpp \
+    Block/blocksfactory.cpp \
+    Block/fillvaluesblock.cpp
 
 
 HEADERS += \
@@ -44,11 +51,18 @@ HEADERS += \
     Block/abstractBlock.h \
     Block/adder.h \
     Block/subtractor.h \
+    Block/multiplier.h \
+    Block/divider.h \
+    Block/adder1w1a2w2a3w3to1w1a2w1.h \
+    Block/adder1w1a2w1to1w1a2w2a3w3.h \
     Type/abstractType.h \
     Type/onedecimalnumber.h \
     Type/twodecimalnumbers.h \
     Type/threedecimalnumbers.h \
-    Wire/wire.h
+    Wire/wire.h \
+    Type/registrtypes.h \
+    Block/blocksfactory.h \
+    Block/fillvaluesblock.h
 
 FORMS += \
         mainwindow.ui \
@@ -59,3 +73,6 @@ QMAKE_CXXFLAGS += -std=gnu++14
 QMAKE_CXXFLAGS += -std=gnu++14
 
 DISTFILES +=
+
+RESOURCES += \
+    resources.qrc

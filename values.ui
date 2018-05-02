@@ -7,8 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>285</height>
+    <height>101</height>
    </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -16,10 +19,10 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>278</x>
-     <y>252</y>
+     <x>170</x>
+     <y>60</y>
      <width>80</width>
-     <height>25</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -28,6 +31,15 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="text">
     <string>OK</string>
    </property>
@@ -35,10 +47,10 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>192</x>
-     <y>252</y>
+     <x>272</x>
+     <y>60</y>
      <width>80</width>
-     <height>25</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="sizePolicy">
