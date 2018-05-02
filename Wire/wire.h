@@ -14,9 +14,7 @@ class wire : public QGraphicsLineItem  {
 private:
     const int WIRE_THICKNESS = 3;
 
-    // ukazatele na in-port/out-port
-    port *startPort = nullptr;
-    port *endPort = nullptr;
+
 
     // detekce zdali je port z porto do portu nebo se teprve tahne mysi
     bool dragFinished = false;
@@ -28,6 +26,10 @@ private:
     int shiftEndY;
 
 public:
+    // ukazatele na in-port/out-port
+    port *startPort = nullptr;
+    port *endPort = nullptr;
+
     // ukazatel na rodice --> scena
     QGraphicsScene *myParent;
 

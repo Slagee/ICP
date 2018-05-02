@@ -48,8 +48,7 @@ private:
     bool onMouse = false;
     bool dragOver = false;
 
-    // ukazatel na drat
-    wire *portWire = nullptr;
+
 
     // port id
     int id;
@@ -58,6 +57,9 @@ private:
     abstractType *dataType = nullptr;
 
 public:
+    // ukazatel na drat
+    wire *portWire = nullptr;
+
     // ukazatel na otce
     abstractBlock *myParent = nullptr;
 

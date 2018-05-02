@@ -89,7 +89,6 @@ private:
     void createToolbarForBlocks();
     void enableAfterForStepCalculations();
     void disableForStepCalculations();
-    void settingPortID();
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event);
