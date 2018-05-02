@@ -36,7 +36,7 @@ fillValuesVlock::fillValuesVlock(abstractBlock *parentBlock, QWidget *parent) : 
     buttonLayout->addWidget(ui->pushButton_2);
     layout->addLayout(buttonLayout);
     this->setLayout(layout);
-    this->layout()->setSpacing(5);
+    this->setFixedSize(layout->minimumSize());
     firstLine->setFocus();
     this->move((qobject_cast<MainWindow *>(parentBlock->myParent->parent()))->x() + ((qobject_cast<MainWindow *>(parentBlock->myParent->parent()))->width() - this->width()) / 2,
                  (qobject_cast<MainWindow *>(parentBlock->myParent->parent()))->y() + ((qobject_cast<MainWindow *>(parentBlock->myParent->parent()))->height() - this->height()) / 2);

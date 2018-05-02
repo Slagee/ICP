@@ -405,3 +405,46 @@ void MainWindow::on_actionnapoveda_triggered() {
     qDebug("boom");
 }
 */
+
+void MainWindow::on_action_Save_triggered() {
+    QDomDocument scheme;
+
+    QDomElement root = scheme.createElement("Scheme");
+    scheme.appendChild(root);
+
+    for(int i = 0; i < this->countBlocks(); i++){
+        QDomElement block = scheme.createElement("Block");
+        block.setAttribute("Type", this->getBlock(i)->getBlockName());
+        block.setAttribute("X", this->getBlock(i)->startX);
+        block.setAttribute("Y", this->getBlock(i)->startY);
+        root.appendChild(block);
+        for(int j = 0; j < this->getBlock(i)->getInPortsCount(); j++) {
+            QDomElement portElement = scheme.createElement("Port");
+            portElement.setAttribute("ID", this->getBlock(i)->getInPort(j)->getPortID());
+            block.appendChild(portElement);
+            for(int k = 0; k < this->getBlock(i)->getInPort(j)->getDataType()->getValuesLength(); k++){
+                QDomElement valueElement = scheme.createElement("Value");
+                valueElement.setAttribute("Value", this->getBlock(i)->getInPort(j)->getDataType()->getValue(k));
+                portElement.appendChild(valueElement);
+            }
+        }
+        for(int k = 0; k < this->getBlock(i)->getOutPortsCount(); k++) {
+            if(this->getBlock(i)->getOutPort(k)->getWire() != nullptr) {
+                QDomElement wireElement = scheme.createElement("Wire");
+                wireElement.setAttribute("Out-Port", this->getBlock(i)->getOutPort(k)->getPortID());
+                wireElement.setAttribute("In-Port", this->getBlock(i)->getOutPort(k)->getWire()->getOtherPort(this->getBlock(i)->getOutPort(k))->getPortID());
+                root.appendChild(wireElement);
+            }
+        }
+    }
+
+    QFile file("/home/lukas/test.xml");
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Neco spatne";
+    } else {
+        QTextStream stream(&file);
+        stream << scheme.toString();
+        file.close();
+        qDebug() << "DONE";
+    }
+}

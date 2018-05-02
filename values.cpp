@@ -1,11 +1,13 @@
 #include "Port/port.h"
 
-Values::Values(port *parentPort, QWidget *parent) : QDialog(parent), ui(new Ui::Values)
-{
+Values::Values(port *parentPort, QWidget *parent) : QDialog(parent), ui(new Ui::Values) {
     ui->setupUi(this);
-    setWindowTitle("Fill in-port value(s)");
-    auto layout = new QVBoxLayout();
+    setWindowTitle("Fill in-port value/s");
     blockPort = parentPort;
+    auto layout = new QVBoxLayout();
+    QLabel *header = new QLabel("Value of type: " + blockPort->getDataType()->getType());
+    header->setStyleSheet("font-weight: bold");
+    layout->addWidget(header);
     QLineEdit *firstLine = nullptr;
     for(int i = 0; i < blockPort->getDataType()->getValuesLength(); i++) {
         auto groupLineLayout = new QHBoxLayout();
@@ -23,23 +25,21 @@ Values::Values(port *parentPort, QWidget *parent) : QDialog(parent), ui(new Ui::
     }
     auto buttonLayout = new QHBoxLayout();
     buttonLayout->addSpacing(200);
-    buttonLayout->addWidget(ui->pushButton);
     buttonLayout->addWidget(ui->pushButton_2);
+    buttonLayout->addWidget(ui->pushButton);
     layout->addLayout(buttonLayout);
     this->setLayout(layout);
-    this->layout()->setSpacing(5);
+    this->setFixedSize(layout->minimumSize());
     firstLine->setFocus();
     this->move((qobject_cast<MainWindow *>(parentPort->myParent->myParent->parent()))->x() + ((qobject_cast<MainWindow *>(parentPort->myParent->myParent->parent()))->width() - this->width()) / 2,
                  (qobject_cast<MainWindow *>(parentPort->myParent->myParent->parent()))->y() + ((qobject_cast<MainWindow *>(parentPort->myParent->myParent->parent()))->height() - this->height()) / 2);
 }
 
-Values::~Values()
-{
+Values::~Values() {
     delete ui;
 }
 
-void Values::on_pushButton_clicked()
-{
+void Values::on_pushButton_clicked() {
     for(int i = 0; i < blockPort->getDataType()->getValuesLength(); i++) {
             blockPort->getDataType()->setValue(i, this->findChild<QLineEdit *>(QString::number(i))->text().toDouble());
             blockPort->getDataType()->setValuesSet(true);

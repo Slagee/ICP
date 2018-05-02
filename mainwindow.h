@@ -1,11 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QtCore>
 #include <QDebug>
 #include <QCursor>
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QtGui>
+#include <QtXml/QDomElement>
+#include <QtXml/QDomDocument>
 #include <QMessageBox>
 
 #include "ui_mainwindow.h"
@@ -36,6 +39,8 @@ private slots:
     void on_actionStep_Calculation_triggered();
    // void on_actionnapoveda_triggered();
     void on_actionHelp_triggered();
+
+    void on_action_Save_triggered();
 
 private:
     // promenned pro vyreseni spravne pozice sceny

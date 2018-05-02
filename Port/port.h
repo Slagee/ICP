@@ -74,6 +74,8 @@ public:
     void setInPort(bool value);
     bool getInPort();
 
+    int getPortID();
+
     wire *getWire();
     void setWire(wire *value);
     abstractType *getDataType();
@@ -103,15 +105,14 @@ class Values : public QDialog
 public:
     explicit Values(port *parentPort, QWidget *parent = 0);
     ~Values();
-    QGroupBox *groupBox;
     QLineEdit *line;
 
 private slots:
    void on_pushButton_clicked();
 
 private:
-    Ui::Values *ui;
-    port *blockPort;
+   port *blockPort;
+   Ui::Values *ui;
 };
 
 #endif // PORT_H

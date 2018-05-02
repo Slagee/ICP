@@ -40,6 +40,8 @@ void port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawEllipse(portBox);
 }
 
+int port::getPortID() {return this->x()*this->y()*this->myParent->startX*this->myParent->startY; }
+
 int port::getPortRadius() { return this->PORT_RADIUS; }
 
 void port::setInPort(bool value) { this->inPort = value; }
