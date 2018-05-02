@@ -394,3 +394,87 @@ void MainWindow::on_actionnapoveda_triggered() {
     qDebug("boom");
 }
 */
+
+void MainWindow::on_action_Save_triggered() {
+    QDomDocument scheme;
+
+    QDomElement root = scheme.createElement("Scheme");
+    scheme.appendChild(root);
+
+    for(int i = 0; i < this->countBlocks(); i++){
+        QDomElement block = scheme.createElement("Block");
+        block.setAttribute("Type", this->getBlock(i)->getBlockType());
+        block.setAttribute("X", this->getBlock(i)->startX+this->getBlock(i)->x());
+        block.setAttribute("Y", this->getBlock(i)->startY+this->getBlock(i)->y());
+        root.appendChild(block);
+        for(int j = 0; j < this->getBlock(i)->getInPortsCount(); j++) {
+            QDomElement portElement = scheme.createElement("Port");
+            portElement.setAttribute("ID", this->getBlock(i)->getInPort(j)->getPortID());
+            block.appendChild(portElement);
+            for(int k = 0; k < this->getBlock(i)->getInPort(j)->getDataType()->getValuesLength(); k++){
+                QDomElement valueElement = scheme.createElement("Value");
+                valueElement.setAttribute("Value", this->getBlock(i)->getInPort(j)->getDataType()->getValue(k));
+                portElement.appendChild(valueElement);
+            }
+        }
+        for(int k = 0; k < this->getBlock(i)->getOutPortsCount(); k++) {
+            if(this->getBlock(i)->getOutPort(k)->getWire() != nullptr) {
+                QDomElement wireElement = scheme.createElement("Wire");
+                wireElement.setAttribute("Out-Port", this->getBlock(i)->getOutPort(k)->getPortID());
+                wireElement.setAttribute("In-Port", this->getBlock(i)->getOutPort(k)->getWire()->getOtherPort(this->getBlock(i)->getOutPort(k))->getPortID());
+                root.appendChild(wireElement);
+            }
+        }
+    }
+
+    QString fileName = QFileDialog::getSaveFileName(this,"Save Scheme", "", "Scheme (*.sch)", 0, QFileDialog::DontUseNativeDialog);
+    if (fileName.isEmpty()) {
+        return;
+    } else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::information(this, tr("Unable to open file"), file.errorString());
+            return;
+        }
+        QTextStream stream(&file);
+        stream << scheme.toString();
+        file.close();
+    }
+}
+
+void MainWindow::on_action_Open_triggered()
+{
+    QDomDocument scheme;
+
+    QString fileName = QFileDialog::getOpenFileName(this, "Open Scheme", "", "Scheme (*.sch)", 0, QFileDialog::DontUseNativeDialog);
+    if (fileName.isEmpty()) {
+        return;
+    } else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::information(this, "Unable to open file", file.errorString());
+            return;
+        }
+        scheme.setContent(&file);
+        file.close();
+    }
+    while (this->scene->items().length() > 0) {
+        delete this->scene->items().at(0);
+    }
+
+    QDomElement xmlroot = scheme.firstChildElement();
+
+    QDomNodeList blocks = xmlroot.elementsByTagName("Block");
+    for(int i = 0; i < blocks.count(); i++) {
+        QDomElement block = blocks.at(i).toElement();
+        blocksfactory(block.attribute("Type").toDouble(), block.attribute("X").toDouble() + this->TOOLBAR_WIDTH + 2 * this->TOOLBAR_MARGIN, block.attribute("Y").toDouble() + this->MENU_HEIGHT, this->scene);
+        QDomNodeList ports = block.elementsByTagName("Port");
+        for(int j = 0; j < ports.count(); j++) {
+            QDomElement port = ports.at(j).toElement();
+            if(port.attribute("ID").toDouble() == this->getBlock(i)->getInPort(j)->getPortID()) {
+                for(int k = 0; k < this->getBlock(i)->getInPort(j)->getDataType()->getValuesLength(); k++)
+                    this->getBlock(i)->getInPort(j)->getDataType()->setValue(k, port.attribute("Value").toDouble());
+            }
+        }
+    }
+}

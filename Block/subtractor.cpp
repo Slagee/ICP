@@ -18,6 +18,8 @@ int subtractor::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int subtractor::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
+int subtractor::getBlockType() const { return BLOCK_TYPE; }
+
 QString subtractor::getBlockName() const { return BLOCK_NAME; }
 
 QString subtractor::getInPortLabel(int index) const { return IN_PORTS_LABELS[index]; }

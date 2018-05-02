@@ -60,6 +60,7 @@ public:
     virtual int getBlockHeight() const = 0;
     virtual int getInPortsCount() const = 0;
     virtual int getOutPortsCount() const = 0;
+    virtual int getBlockType() const = 0;
     virtual QString getBlockName() const = 0;
     virtual QString getInPortLabel(int index) const = 0;
     virtual QString getOutPortLabel(int index) const = 0;

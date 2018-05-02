@@ -18,6 +18,8 @@ int adder1w1a2w2a3w3to1w1a2w1::getInPortsCount() const { return IN_PORTS_COUNT; 
 
 int adder1w1a2w2a3w3to1w1a2w1::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
+int adder1w1a2w2a3w3to1w1a2w1::getBlockType() const { return BLOCK_TYPE; }
+
 QString adder1w1a2w2a3w3to1w1a2w1::getBlockName() const { return BLOCK_NAME; }
 
 QString adder1w1a2w2a3w3to1w1a2w1::getInPortLabel(int index) const { return IN_PORTS_LABELS[index]; }

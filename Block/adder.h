@@ -18,6 +18,7 @@ private:
     const QString OUT_PORTS_LABELS[OUT_PORTS_COUNT] = {"1.1"};
     const QString OUT_PORTS_DATA_TYPES[OUT_PORTS_COUNT] = {"One Decimal Number"};
     const QString BLOCK_NAME = "ADD";
+    const static int BLOCK_TYPE = 0;
 
 public:
     // metody pro praci s blokem - konstruktor + metody pro ziskani informaci o bloku
@@ -34,6 +35,7 @@ public:
     QString getOutPortLabel(int index) const;
     QString getInPortDataType(int index) const;
     QString getOutPortDataType(int index) const;
+    int getBlockType() const;
     void doCalculation();
 };
 
