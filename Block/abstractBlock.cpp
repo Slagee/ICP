@@ -137,11 +137,17 @@ void abstractBlock::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
     }
 }
 
-void abstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
+void abstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     if(event->button()==Qt::RightButton){
-            fillValuesVlock values(this);
-            values.setModal(true);
-            values.exec();
+        for(int i = 0; this->getInPortsCount(); i++) {
+            if(this->getInPort(i)->portWire != nullptr) {
+                QMessageBox::warning(0,"Error","Port is already connected!");
+                break;
+            } else {
+                fillValuesVlock values(this);
+                values.setModal(true);
+                values.exec();
+            }
+        }
     }
 }
