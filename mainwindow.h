@@ -55,6 +55,8 @@ private:
     const int TOOLBAR_MARGIN = 6;
     const int TOOLS_NOT_ACTIVE = 9999;
 
+    int newID;
+
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     int tool = TOOLS_NOT_ACTIVE;
@@ -87,6 +89,7 @@ private:
     void createToolbarForBlocks();
     void enableAfterForStepCalculations();
     void disableForStepCalculations();
+    void settingPortID();
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event);

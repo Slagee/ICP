@@ -442,8 +442,7 @@ void MainWindow::on_action_Save_triggered() {
     }
 }
 
-void MainWindow::on_action_Open_triggered()
-{
+void MainWindow::on_action_Open_triggered() {
     QDomDocument scheme;
 
     QString fileName = QFileDialog::getOpenFileName(this, "Open Scheme", "", "Scheme (*.sch)", 0, QFileDialog::DontUseNativeDialog);
@@ -468,13 +467,27 @@ void MainWindow::on_action_Open_triggered()
     for(int i = 0; i < blocks.count(); i++) {
         QDomElement block = blocks.at(i).toElement();
         blocksfactory(block.attribute("Type").toDouble(), block.attribute("X").toDouble() + this->TOOLBAR_WIDTH + 2 * this->TOOLBAR_MARGIN, block.attribute("Y").toDouble() + this->MENU_HEIGHT, this->scene);
+        settingPortID();
         QDomNodeList ports = block.elementsByTagName("Port");
         for(int j = 0; j < ports.count(); j++) {
             QDomElement port = ports.at(j).toElement();
-            if(port.attribute("ID").toDouble() == this->getBlock(i)->getInPort(j)->getPortID()) {
-                for(int k = 0; k < this->getBlock(i)->getInPort(j)->getDataType()->getValuesLength(); k++)
-                    this->getBlock(i)->getInPort(j)->getDataType()->setValue(k, port.attribute("Value").toDouble());
+            if(port.attribute("ID").toDouble() == this->getBlock(0)->getInPort(j)->getPortID()) {
+                for(int k = 0; k < this->getBlock(0)->getInPort(j)->getDataType()->getValuesLength(); k++)
+                    this->getBlock(0)->getInPort(j)->getDataType()->setValue(k, port.attribute("Value").toDouble());
             }
         }
+    }
+}
+
+void MainWindow::settingPortID() {
+    static int IDCounter = 0;
+    this->newID = IDCounter;
+    for(int j = 0; j < this->getBlock(0)->getInPortsCount(); j++){
+        this->getBlock(0)->getInPort(j)->setPortID(IDCounter);
+        IDCounter++;
+    }
+    for(int i = 0; i < this->getBlock(0)->getOutPortsCount(); i++) {
+        this->getBlock(0)->getOutPort(i)->setPortID(IDCounter);
+        IDCounter++;
     }
 }
