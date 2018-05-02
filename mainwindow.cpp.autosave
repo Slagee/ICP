@@ -504,7 +504,7 @@ void MainWindow::on_action_Open_triggered() {
                 QDomElement value = values.at(k).toElement();
                 qDebug() << "port je " << j << " id hodnoty je " << k << " a ma hodnotu " << value.attribute("Value");
                 this->getBlock(0)->getOutPort(j)->getDataType()->setValue(k, value.attribute("Values").toDouble());
-                qDebug() << "na blok se uloitilo " << this->getBlock(0)->getOutPort(j)->getDataType()->getValue(k);
+                qDebug() << "na blok se uloizilo " << this->getBlock(0)->getOutPort(j)->getDataType()->getValue(k);
             }
         }
     }

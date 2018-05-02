@@ -20,11 +20,7 @@ QRectF wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(),
 void wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
 
 
-    painter->setClipRect( option->exposedRect );
-
-    static int counter = 0;
-    qDebug() << "rect wiru je " << this->boundingRect() << " " << counter;
-    counter++;
+    //painter->setClipRect( option->exposedRect );
 
     QPen pen;
     pen.setWidth(WIRE_THICKNESS);

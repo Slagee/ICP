@@ -24,8 +24,6 @@ void port::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     // prostor pro port
     QRectF portBox = boundingRect();
 
-    qDebug() << "maluju port";
-
     // pro nastaveni barvy portu
     QBrush brush(this->WIRELESS_UNSET_IN_PORT_COLOR);
 

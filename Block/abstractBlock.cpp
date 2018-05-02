@@ -34,11 +34,11 @@ void abstractBlock::constructBlock() {
 void abstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
     // pro telo bloku
     QRectF blockBox = boundingRect();
-
+/*
     static int cpounter=0;
     qDebug() << "hybu blokem "  << cpounter;
     cpounter++;
-
+*/
     // pro umisteni textu v bloku
     QFont fontLabels(this->BLOCK_TEXT_FONT, this->BLOCK_LABEL_SIZE);
     QTextOption inPortLabelOptions(Qt::AlignLeft);
