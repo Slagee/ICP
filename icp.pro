@@ -25,53 +25,72 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    Block/abstractBlock.cpp \
-    Block/adder.cpp \
-    Block/subtractor.cpp \
-    Block/multiplier.cpp \
-    Block/divider.cpp \
-    Block/adder1w1a2w2a3w3to1w1a2w1.cpp \
-    Block/adder1w1a2w1to1w1a2w2a3w3.cpp \
-    Type/abstractType.cpp \
-    Type/onedecimalnumber.cpp \
-    Type/twodecimalnumbers.cpp \
-    Type/threedecimalnumbers.cpp\
-    Port/port.cpp \
-    Wire/wire.cpp \
-    values.cpp \
-    Type/registrtypes.cpp \
-    Block/blocksfactory.cpp \
-    Block/fillvaluesblock.cpp
+    Block/AbstractBlock.cpp \
+    Port/Port.cpp \
+    Block/BlocksFactory.cpp \
+    Block/FillValuesBlock.cpp \
+    Block/Blocks/Aadder1w1a2w1to1w1a2w2a3w3.cpp \
+    Block/Blocks/Adder.cpp \
+    Block/Blocks/Adder1w1a2w2a3w3to1w1a2w1.cpp \
+    Block/Blocks/Adder1w2to1w1.cpp \
+    Block/Blocks/Adder1w3to1w1a2w1.cpp \
+    Block/Blocks/Divider.cpp \
+    Block/Blocks/Multiplier.cpp \
+    Block/Blocks/Round.cpp \
+    Block/Blocks/Subtractor.cpp \
+    Block/Blocks/WaterLaboratory.cpp \
+    Type/AbstractType.cpp \
+    Type/RegisterTypes.cpp \
+    Type/Types/CarbonDioxide.cpp \
+    Type/Types/Hydrogenium.cpp \
+    Type/Types/Methan.cpp \
+    Type/Types/OneDecimalNumber.cpp \
+    Type/Types/Oxid.cpp \
+    Type/Types/ThreeDecimalNumbers.cpp \
+    Type/Types/TwoDecimalNumbers.cpp \
+    Type/Types/Water.cpp \
+    Port/FillValuesPort.cpp \
+    Wire/Wire.cpp \
+    Main.cpp \
+    MainWindow.cpp
 
 
 HEADERS += \
-    mainwindow.h \
-    Port/port.h \
-    Block/abstractBlock.h \
-    Block/adder.h \
-    Block/subtractor.h \
-    Block/multiplier.h \
-    Block/divider.h \
-    Block/adder1w1a2w2a3w3to1w1a2w1.h \
-    Block/adder1w1a2w1to1w1a2w2a3w3.h \
-    Type/abstractType.h \
-    Type/onedecimalnumber.h \
-    Type/twodecimalnumbers.h \
-    Type/threedecimalnumbers.h \
-    Wire/wire.h \
-    Type/registrtypes.h \
-    Block/blocksfactory.h \
-    Block/fillvaluesblock.h
+    Block/AbstractBlock.h \
+    Port/Port.h \
+    Block/BlocksFactory.h \
+    Block/FillValuesBlock.h \
+    Block/Blocks/Adder.h \
+    Block/Blocks/Adder1w1a2w1to1w1a2w2a3w3.h \
+    Block/Blocks/Adder1w1a2w2a3w3to1w1a2w1.h \
+    Block/Blocks/Adder1w2to1w1.h \
+    Block/Blocks/Adder1w3to1w1a2w1.h \
+    Block/Blocks/Divider.h \
+    Block/Blocks/Multiplier.h \
+    Block/Blocks/Round.h \
+    Block/Blocks/Subtractor.h \
+    Block/Blocks/WaterLaboratory.h \
+    Type/AbstractType.h \
+    Type/RegisterTypes.h \
+    Type/Types/CarbonDioxide.h \
+    Type/Types/Hydrogenium.h \
+    Type/Types/Methan.h \
+    Type/Types/OneDecimalNumber.h \
+    Type/Types/Oxid.h \
+    Type/Types/ThreeDecimalNumbers.h \
+    Type/Types/TwoDecimalNumbers.h \
+    Type/Types/Water.h \
+    Port/FillValuesPort.h \
+    Wire/Wire.h \
+    MainWindow.h
 
 FORMS += \
-        mainwindow.ui \
-    values.ui
+    MainWindow.ui \
+    FillValues.ui
 
 QMAKE_CXXFLAGS += -std=gnu++14
 
 DISTFILES +=
 
 RESOURCES += \
-    resources.qrc
+    Resources.qrc

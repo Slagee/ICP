@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/Resources">
+        <file>Resources/finish.png</file>
+        <file>Resources/next.png</file>
+        <file>Resources/stop.png</file>
+        <file>Resources/Adder.png</file>
+        <file>Resources/Adder1w1a2w1to1w1a2w2a3w3.png</file>
+        <file>Resources/Adder1w1a2w2a3w3to1w1a2w1.png</file>
+        <file>Resources/Adder1w2to1w1.png</file>
+        <file>Resources/Adder1w3to1w1a2w1.png</file>
+        <file>Resources/Divider.png</file>
+        <file>Resources/Multiplier.png</file>
+        <file>Resources/Round.png</file>
+        <file>Resources/Subtractor.png</file>
+        <file>Resources/WaterLaboratory.png</file>
+    </qresource>
+</RCC>
