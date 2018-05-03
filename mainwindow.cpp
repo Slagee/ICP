@@ -510,24 +510,26 @@ void MainWindow::on_action_Open_triggered() {
     }
     QDomNodeList wires = xmlroot.elementsByTagName("Wire");
     for(int l = 0; l < wires.count(); l++) {
+        wire *tempWire = new wire(this->scene);
+        this->scene->addItem(tempWire);
         QDomElement wireElement = wires.at(l).toElement();
         for(int m = 0; m < this->countBlocks(); m++) {
             for(int n = 0; n < this->getBlock(m)->getOutPortsCount(); n++) {
                 if(this->getBlock(m)->getOutPort(n)->getPortID() == wireElement.attribute("Out-Port").toInt()) {
                     qDebug() << "Found it";
-                    this->getBlock(m)->getOutPort(n)->portWire = new wire(this->scene);
-                    this->getBlock(m)->getOutPort(n)->portWire->setEndPort(this->getBlock(m)->getOutPort(n));
-                    this->getBlock(m)->scene()->addItem(this->getBlock(m)->getOutPort(n)->portWire);
+                    this->getBlock(m)->getOutPort(n)->portWire = tempWire;
+                    this->getBlock(m)->getOutPort(n)->getWire()->setEndPort(this->getBlock(m)->getOutPort(n));
                     qDebug() << "Did it";
                 }
             }
             for(int o = 0; o < this->getBlock(m)->getInPortsCount(); o++) {
                 if(this->getBlock(m)->getInPort(o)->getPortID() == wireElement.attribute("In-Port").toInt()) {
+                    this->getBlock(m)->getInPort(o)->portWire = tempWire;
                     this->getBlock(m)->getInPort(o)->portWire = qgraphicsitem_cast<wire *>(this->scene->items().first());
                     qDebug() << "Found it too";
-                    this->getBlock(m)->getInPort(o)->portWire->setStartPort(this->getBlock(m)->getInPort(o));
+                    this->getBlock(m)->getInPort(o)->getWire()->setStartPort(this->getBlock(m)->getInPort(o));
                     qDebug() << "Did it too";
-                    this->getBlock(m)->getInPort(o)->portWire->setDragFinished(true);
+                    this->getBlock(m)->getInPort(o)->getWire()->setDragFinished(true);
                 }
             }
         }
