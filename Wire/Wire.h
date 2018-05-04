@@ -1,9 +1,13 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef WIRE_H
 #define WIRE_H
-
-#include <QPainter>
-#include <QGraphicsLineItem>
-#include <QDebug>
 
 #include "MainWindow.h"
 
@@ -44,7 +48,6 @@ private:
      */
     bool dragFinished = false;
 
-public:
     /*!
      * \brief startPort - ukazatel na vstupní port
      */
@@ -55,6 +58,7 @@ public:
      */
     Port *endPort = nullptr;
 
+public:
     /*!
      * \brief myParent - ukazatel na rodiče (scéna)
      */
@@ -147,6 +151,6 @@ protected:
      * \param event - ukazatel na událost
      */
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-
 };
+
 #endif // WIRE_H

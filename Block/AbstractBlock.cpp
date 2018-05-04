@@ -1,13 +1,19 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "AbstractBlock.h"
-#include <QMetaObject>
-#include <QGraphicsObject>
+
 QRectF AbstractBlock::boundingRect() const { return QRectF(this->startX, this->startY, this->getBlockWidth(), this->getBlockHeight()); }
 
 void AbstractBlock::constructBlock() {
-    // ukazatel na port, pro vytvoreni vsech portu
     Port *newPort;
 
-    // pro vzdalenost mezi porty
+    // vzdalenost mezi stredy portu
     int portsDistance = (this->getBlockHeight() - 2 * this->TOP_BOTTOM_SPACING) / (this->getInPortsCount() + 1);
 
     // cyklus pro vytvoreni in-portu
@@ -32,20 +38,20 @@ void AbstractBlock::constructBlock() {
 }
 
 void AbstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *options, QWidget *widget) {
-    // pro telo bloku
+
+    // telo bloku
     QRectF blockBox = boundingRect();
 
-    // pro umisteni textu v bloku
+    // nastaveni fontu pro texty na bloku
     QFont fontLabels(this->BLOCK_TEXT_FONT, this->BLOCK_LABEL_SIZE);
     QTextOption inPortLabelOptions(Qt::AlignLeft);
     QTextOption outPortLabelOptions(Qt::AlignRight);
     QFontMetrics fontMetrics(fontLabels);
-
     painter->setFont(fontLabels);
 
     Port *blockPort;
 
-    // cyklus pro nastaveni pripadnych novych zacatku/koncu pripadny dratu na bloku
+    // cyklus pro nastaveni pripadnych novych zacatku/koncu dratu na bloku
     for (int i = 0; i < this->childItems().length(); i++) {
         blockPort = qgraphicsitem_cast<Port *>(this->childItems()[i]);
         if (blockPort->getWire() != nullptr) {
@@ -61,18 +67,23 @@ void AbstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         }
     }
 
+    // oblast pro popisky
     QRectF boxForLabel;
-    int portsDistance = (this->getBlockHeight() - 2 * this->TOP_BOTTOM_SPACING) / (this->getInPortsCount() + 1);
 
+    // vzdalenost mezi
+    int portsLabelsDistance = (this->getBlockHeight() - 2 * this->TOP_BOTTOM_SPACING) / (this->getInPortsCount() + 1);
+
+    // vykresleni popisku in-portu
     for (int i = 1; i <= this->getInPortsCount(); i++) {
-        boxForLabel = QRectF(this->startX + this->LABELS_SPACING, this->startY + i * portsDistance + this->TOP_BOTTOM_SPACING - fontMetrics.height() / 2, this->getBlockWidth() - this->LABELS_SPACING, fontMetrics.height());
+        boxForLabel = QRectF(this->startX + this->LABELS_SPACING, this->startY + i * portsLabelsDistance + this->TOP_BOTTOM_SPACING - fontMetrics.height() / 2, this->getBlockWidth() - this->LABELS_SPACING, fontMetrics.height());
         painter->drawText(boxForLabel, this->getInPortLabel(i - 1), inPortLabelOptions);
     }
 
-    portsDistance = (this->getBlockHeight() - 2 * this->TOP_BOTTOM_SPACING) / (this->getOutPortsCount() + 1);
+    portsLabelsDistance = (this->getBlockHeight() - 2 * this->TOP_BOTTOM_SPACING) / (this->getOutPortsCount() + 1);
 
+    // vykresleni popisku out-portu
     for (int i = 1; i <= this->getOutPortsCount(); i++) {
-        boxForLabel = QRectF(this->startX, this->startY + i * portsDistance + this->TOP_BOTTOM_SPACING - fontMetrics.height() / 2, this->getBlockWidth() - this->LABELS_SPACING, fontMetrics.height());
+        boxForLabel = QRectF(this->startX, this->startY + i * portsLabelsDistance + this->TOP_BOTTOM_SPACING - fontMetrics.height() / 2, this->getBlockWidth() - this->LABELS_SPACING, fontMetrics.height());
         painter->drawText(boxForLabel, this->getOutPortLabel(i - 1), outPortLabelOptions);
     }
 
@@ -87,6 +98,9 @@ void AbstractBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     pen.setColor(blockBorderColor);
     painter->setPen(pen);
     painter->drawRect(this->startX, this->startY, this->getBlockWidth(), this->getBlockHeight());
+
+    Q_UNUSED(options);
+    Q_UNUSED(widget);
 }
 
 Port *AbstractBlock::getOutPort(int index) { return qgraphicsitem_cast<Port *>(this->childItems()[index + this->getInPortsCount()]); }
@@ -112,6 +126,8 @@ QColor AbstractBlock::getCalculatedBorderColor() { return this->CALCULATED_BLOCK
 QColor AbstractBlock::getLastCalculatedBorderColor() { return this->LAST_CALCULATED_BLOCK_COLOR; }
 
 void AbstractBlock::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
+
+    // doraz na smazani bloku + pripadne smazani bloku
     QMessageBox::StandardButton deleteBlock;
     deleteBlock = QMessageBox::question(nullptr, "Delete", "Do you really want to delete this block?", QMessageBox::Yes|QMessageBox::No);
     if (deleteBlock == QMessageBox::Yes) {
@@ -131,18 +147,16 @@ void AbstractBlock::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
         }
         delete this;
     }
+
+    Q_UNUSED(event);
 }
 
 void AbstractBlock::mousePressEvent(QGraphicsSceneMouseEvent *event) {
-    if(event->button()==Qt::RightButton){
-        bool wirelessInPort = true;
 
-        if (wirelessInPort) {
-            FillValuesBlock fillValuesBlock(this);
-            fillValuesBlock.setModal(true);
-            fillValuesBlock.exec();
-        } else {
-            QMessageBox::information(0, "Nothing to fill", "All IN-ports are wired...");
-        }
+    // formular pro vyplneni vstupnich portu bloku
+    if(event->button()==Qt::RightButton){
+        FillValuesBlock fillValuesBlock(this);
+        fillValuesBlock.setModal(true);
+        fillValuesBlock.exec();
     }
 }

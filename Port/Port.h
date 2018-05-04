@@ -1,32 +1,24 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef PORT_H
 #define PORT_H
 
-#include <QPainter>
-#include <QGraphicsEllipseItem>
 #include <QGraphicsSceneMouseEvent>
-#include <QDebug>
 #include <QtWidgets>
-#include <QColor>
-#include <QDragEnterEvent>
-#include <QDialog>
-#include <QGroupBox>
-#include <QLineEdit>
 #include <QMessageBox>
-#include <QLabel>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QToolTip>
-#include <QMetaObject>
 
-#include "Type/AbstractType.h"
 #include "Port/FillValuesPort.h"
 #include "Wire/Wire.h"
-#include "ui_values.h"
 
 class AbstractBlock;
 class AbstractType;
 class Wire;
-class FillValuesPort;
 
 /*!
  * \brief Třída reprezentující port.
@@ -88,12 +80,17 @@ private:
      */
     AbstractType *dataType = nullptr;
 
-public:
+    /*!
+     * \brief isInCycle - slouží k detekci cyklů
+     */
+    bool isInCycle = false;
+
     /*!
      * \brief portWire - ukazatel na drát, který je v portu
      */
     Wire *portWire = nullptr;
 
+public:
     /*!
      * \brief myParent - ukazatel na rodiče (blok)
      */
@@ -193,6 +190,18 @@ public:
      * \return Vrací id pro další port.
      */
     int getNextId(bool value = false);
+
+    /*!
+     * \brief Metoda pro zjištění, jak ma nastavenou proměnnou pro detekci cyklů.
+     * \return Vrací true (pokud byl blok navštíven), jinak false
+     */
+    bool getIsInCycle();
+
+    /*!
+     * \brief Metoda pro nastavení proměnné pro detekci cyklů.
+     * \param value - hodnota, na jakou má být proměnná nastavena
+     */
+    void setIsInCycle(bool value);
 
 protected:
     /*!

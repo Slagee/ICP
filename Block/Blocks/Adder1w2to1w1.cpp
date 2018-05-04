@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "Adder1w2to1w1.h"
 
 Adder1w2to1w1::Adder1w2to1w1(int x, int y, QGraphicsScene *parent) {
@@ -18,7 +26,7 @@ int Adder1w2to1w1::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int Adder1w2to1w1::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
-int Adder1w2to1w1::getBlockType() const { return BLOCK_TYPE; }
+QString Adder1w2to1w1::getBlockClassName() const { return BLOCK_CLASS_NAME; }
 
 QString Adder1w2to1w1::getBlockName() const { return BLOCK_NAME; }
 

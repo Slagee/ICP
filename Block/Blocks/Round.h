@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef ROUND_H
 #define ROUND_H
 
@@ -56,9 +64,9 @@ private:
     const QString BLOCK_NAME = "ROUND";
 
     /*!
-     * \brief BLOCK_TYPE - konstanta pro nastavení typu bloku
+     * \brief BLOCK_CLASS_NAME - konstanta pro nastavení jména třídy bloku
      */
-    const static int BLOCK_TYPE = 8;
+    const QString BLOCK_CLASS_NAME = "Round";
 
 public:
     /*!
@@ -94,10 +102,10 @@ public:
     int getOutPortsCount() const;
 
     /*!
-     * \brief Metoda pro zjištění typu bloku.
-     * \return Vrací typ bloku.
+     * \brief Metoda pro zjištění jména třídy bloku bloku.
+     * \return Vrací jméno třídy bloku.
      */
-    int getBlockType() const;
+    QString getBlockClassName() const;
 
     /*!
      * \brief Metoda pro zjištění jména (popisu) těla bloku.

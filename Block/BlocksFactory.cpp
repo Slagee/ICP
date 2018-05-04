@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "BlocksFactory.h"
 
 void blocksFactory(int classId, int x, int y, QGraphicsScene *parent) {
@@ -15,19 +23,19 @@ void blocksFactory(int classId, int x, int y, QGraphicsScene *parent) {
         parent->addItem(new Divider(x, y, parent));
         break;
     case(4):
-        parent->addItem(new Adder1w1a2w1to1w1a2w2a3w3(x, y, parent));
+        parent->addItem(new Round(x, y, parent));
         break;
     case(5):
-        parent->addItem(new Adder1w1a2w2a3w3to1w1a2w1(x, y, parent));
+        parent->addItem(new Adder1w1a2w1to1w1a2w2a3w3(x, y, parent));
         break;
     case(6):
-        parent->addItem(new Adder1w2to1w1(x, y, parent));
+        parent->addItem(new Adder1w1a2w2a3w3to1w1a2w1(x, y, parent));
         break;
     case(7):
-        parent->addItem(new Adder1w3to1w1a2w1(x, y, parent));
+        parent->addItem(new Adder1w2to1w1(x, y, parent));
         break;
     case(8):
-        parent->addItem(new Round(x, y, parent));
+        parent->addItem(new Adder1w3to1w1a2w1(x, y, parent));
         break;
     case(9):
         parent->addItem(new WaterLaboratory(x, y, parent));
@@ -35,4 +43,11 @@ void blocksFactory(int classId, int x, int y, QGraphicsScene *parent) {
     }
 }
 
-
+int getClassIdFromClassName(QString name) {
+    for (int i = 0; i < NUMBER_OF_BLOCKS; i++) {
+        if (BLOCKS_CLASSES[i] == name) {
+            return i;
+        }
+    }
+    return 0;
+}

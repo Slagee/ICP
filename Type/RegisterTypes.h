@@ -1,7 +1,13 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef REGISTRTYPES_H
 #define REGISTRTYPES_H
-
-#include <QDebug>
 
 #include "Type/Types/OneDecimalNumber.h"
 #include "Type/Types/TwoDecimalNumbers.h"

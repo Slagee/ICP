@@ -1,14 +1,17 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef ABSTRACTTYPE_H
 #define ABSTRACTTYPE_H
 
 #include <QString>
 #include <QGraphicsItem>
-#include <QMetaType>
-#include <QDebug>
 
-class oneDecimalNumber;
-class twoDecimalNumbers;
-class threeDecimalNumbers;
 class Port;
 
 /*!

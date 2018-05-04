@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "Divider.h"
 
 Divider::Divider(int x, int y, QGraphicsScene *parent) {
@@ -18,7 +26,7 @@ int Divider::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int Divider::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
-int Divider::getBlockType() const { return BLOCK_TYPE; }
+QString Divider::getBlockClassName() const { return BLOCK_CLASS_NAME; }
 
 QString Divider::getBlockName() const { return BLOCK_NAME; }
 

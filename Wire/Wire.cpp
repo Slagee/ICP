@@ -1,5 +1,12 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "Wire.h"
-#include <QToolTip>
 
 Wire::Wire(QGraphicsScene *parent) {
     this->myParent = parent;
@@ -7,7 +14,6 @@ Wire::Wire(QGraphicsScene *parent) {
 }
 
 QRectF Wire::boundingRect() const { return QRectF(0, 0, this->myParent->width(), this->myParent->height()); }
-//QRectF Wire::boundingRect() const { return QRectF(this->startPort->x() + this->shiftStartX + this->startPort->getPortRadius(), this->startPort->y() + this->shiftStartY + this->startPort->getPortRadius(),100, 100); }
 
 void Wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
 
@@ -40,6 +46,9 @@ void Wire::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
             painter->drawLine(this->line());
         }
     }
+
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
 }
 
 void Wire::setStartPort(Port *port) { this->startPort = port; }

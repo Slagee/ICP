@@ -1,16 +1,16 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QtCore>
-#include <QDebug>
-#include <QCursor>
-#include <QMainWindow>
-#include <QGraphicsScene>
-#include <QtGui>
-#include <QFileDialog>
-#include <QtXml/QDomElement>
 #include <QtXml/QDomDocument>
-#include <QMessageBox>
 
 #include "ui_MainWindow.h"
 #include "Block/AbstractBlock.h"
@@ -25,7 +25,6 @@ namespace Ui { class MainWindow; }
  */
 class MainWindow : public QMainWindow {
     Q_OBJECT
-
 public:
     /*!
      * \brief Konstruktor hlavního okna programu.
@@ -98,7 +97,7 @@ private:
     /*!
      * \brief TOOLBAR_HEIGHT - konstanta pro nastavení výšky položky toolbaru pro bloky
      */
-    const int TOOLBAR_HEIGHT = 52;
+    const int TOOLBAR_HEIGHT = 50;
 
     /*!
      * \brief MENU_HEIGHT - konstanta pro výšku menu
@@ -163,6 +162,11 @@ private:
      * \return Vrací true, pokud se ve schématu nachází cykly, jinak false.
      */
     bool findCycles();
+
+    /*!
+     * \brief Metoda pro nastavení portů pro detekci cyklů.
+     */
+    void setPortsForFindingCycles();
 
     /*!
      * \brief Metoda pro zjištění, zdali se blo nachází v cyklu.
@@ -297,6 +301,10 @@ private:
     void disableForStepCalculations();
 
 protected:
+    /*!
+     * \brief Metoda pro zpracování odkliknutí.
+     * \param event - ukazatel na událost
+     */
     void mouseReleaseEvent(QMouseEvent *event);
 };
 

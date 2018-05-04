@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "Multiplier.h"
 
 Multiplier::Multiplier(int x, int y, QGraphicsScene *parent) {
@@ -18,7 +26,7 @@ int Multiplier::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int Multiplier::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
-int Multiplier::getBlockType() const { return BLOCK_TYPE; }
+QString Multiplier::getBlockClassName() const { return BLOCK_CLASS_NAME; }
 
 QString Multiplier::getBlockName() const { return BLOCK_NAME; }
 

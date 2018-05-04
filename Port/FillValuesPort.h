@@ -1,34 +1,31 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef FILLVALUESPORT_H
 #define FILLVALUESPORT_H
-
-
-#include <QGroupBox>
-#include <QDialog>
-#include <QLineEdit>
-#include <QMessageBox>
-#include <QLabel>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
 
 #include "ui_FillValues.h"
 #include "Port/Port.h"
 
 class Port;
-class AbstractBlock;
 
 /*!
  * \brief Třída reprezentující okno pro vyplenění hodnot vstupního portu.
  */
 class FillValuesPort : public QDialog {
     Q_OBJECT
-
 public:
     /*!
      * \brief Konstruktor okna pro vyplenění hodnot vstupních portů celého bloku.
-     * \param parentPort - ukazatel na vstupní port, jehož hodnoty má uživatel vyplnit
+     * \param somePort - ukazatel na vstupní port, jehož hodnoty má uživatel vyplnit
      * \param parent - ukazatel na widget, který okno volá
      */
-    explicit FillValuesPort(Port *parentPort, QWidget *parent = 0);
+    explicit FillValuesPort(Port *somePort, QWidget *parent = 0);
     ~FillValuesPort();
 
 private slots:
@@ -46,7 +43,7 @@ private:
    /*!
     * \brief blockPort - ukazatel na vstupní port, pro který má uživatel vyplnit hodnoty
     */
-   Port *blockPort;
+   Port *port;
 };
 
 #endif // FILLVALUESPORT_H

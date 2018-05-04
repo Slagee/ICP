@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef ADDER1W3TO1W1A2W1_H
 #define ADDER1W3TO1W1A2W1_H
 
@@ -56,9 +64,9 @@ private:
     const QString BLOCK_NAME = "ADD";
 
     /*!
-     * \brief BLOCK_TYPE - konstanta pro nastavení typu bloku
+     * \brief BLOCK_CLASS_NAME - konstanta pro nastavení jména třídy bloku
      */
-    const static int BLOCK_TYPE = 7;
+    const QString BLOCK_CLASS_NAME = "Adder1w3to1w1a2w1";
 
 public:
     /*!
@@ -94,10 +102,10 @@ public:
     int getOutPortsCount() const;
 
     /*!
-     * \brief Metoda pro zjištění typu bloku.
-     * \return Vrací typ bloku.
+     * \brief Metoda pro zjištění jména třídy bloku bloku.
+     * \return Vrací jméno třídy bloku.
      */
-    int getBlockType() const;
+    QString getBlockClassName() const;
 
     /*!
      * \brief Metoda pro zjištění jména (popisu) těla bloku.

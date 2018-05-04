@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef ONEDECIMALNUMBER_H
 #define ONEDECIMALNUMBER_H
 
@@ -7,7 +15,6 @@
  * \brief Třída reprezentující typ OneDecimalNumber
  */
 class OneDecimalNumber : public AbstractType {
-
 private:
     /*!
      * \brief TYPE_NAME - konstanta pro nastavení názvu typu"

@@ -1,17 +1,19 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef ABSTRACTBLOCK_H
 #define ABSTRACTBLOCK_H
 
-#include <QPainter>
 #include <QGraphicsItemGroup>
-#include <QGraphicsSceneMouseEvent>
-#include <QDebug>
-#include <QString>
-#include <QTextOption>
 
 #include "Port/Port.h"
-#include "FillValuesBlock.h"
+#include "Block/FillValuesBlock.h"
 
-class Wire;
 class Port;
 
 /*!
@@ -144,10 +146,10 @@ public:
     virtual int getOutPortsCount() const = 0;
 
     /*!
-     * \brief Metoda pro zjištění typu bloku.
-     * \return Vrací typ bloku.
+     * \brief Metoda pro zjištění jména třídy bloku bloku.
+     * \return Vrací jméno třídy bloku.
      */
-    virtual int getBlockType() const = 0;
+    virtual QString getBlockClassName() const = 0;
 
     /*!
      * \brief Metoda pro zjištění jména (popisu) těla bloku.

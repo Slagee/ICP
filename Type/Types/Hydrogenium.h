@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #ifndef HYDROGENIUM_H
 #define HYDROGENIUM_H
 
@@ -7,7 +15,6 @@
  * \brief Třída reprezentující typ Hydrogenium
  */
 class Hydrogenium : public AbstractType {
-
 private:
     /*!
      * \brief TYPE_NAME - konstanta pro nastavení názvu typu"

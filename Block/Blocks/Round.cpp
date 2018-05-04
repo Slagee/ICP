@@ -1,3 +1,11 @@
+/*!
+ * \title Projekt do ICP - Program pro tvorbu blokových schémat
+ *
+ * \authors Radek Hůlka (xhulka02), Lukáš Lazar (xlazar10)
+ *
+ * \date 3.5.2018
+ */
+
 #include "Round.h"
 
 Round::Round(int x, int y, QGraphicsScene *parent) {
@@ -18,7 +26,7 @@ int Round::getInPortsCount() const { return IN_PORTS_COUNT; }
 
 int Round::getOutPortsCount() const { return OUT_PORTS_COUNT; }
 
-int Round::getBlockType() const { return BLOCK_TYPE; }
+QString Round::getBlockClassName() const { return BLOCK_CLASS_NAME; }
 
 QString Round::getBlockName() const { return BLOCK_NAME; }
 
